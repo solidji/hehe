@@ -1,0 +1,457 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DBCA954D188190B600C2CCA1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBCA954C188190B600C2CCA1 /* Foundation.framework */; };
+		DBCA954F188190B600C2CCA1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBCA954E188190B600C2CCA1 /* CoreGraphics.framework */; };
+		DBCA9551188190B600C2CCA1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBCA9550188190B600C2CCA1 /* UIKit.framework */; };
+		DBCA9557188190B600C2CCA1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DBCA9555188190B600C2CCA1 /* InfoPlist.strings */; };
+		DBCA9559188190B600C2CCA1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DBCA9558188190B600C2CCA1 /* main.m */; };
+		DBCA955D188190B700C2CCA1 /* com_appgame_heheAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DBCA955C188190B700C2CCA1 /* com_appgame_heheAppDelegate.m */; };
+		DBCA955F188190B700C2CCA1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBCA955E188190B700C2CCA1 /* Images.xcassets */; };
+		DBCA9566188190B700C2CCA1 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBCA9565188190B700C2CCA1 /* XCTest.framework */; };
+		DBCA9567188190B700C2CCA1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBCA954C188190B600C2CCA1 /* Foundation.framework */; };
+		DBCA9568188190B700C2CCA1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBCA9550188190B600C2CCA1 /* UIKit.framework */; };
+		DBCA9570188190B700C2CCA1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DBCA956E188190B700C2CCA1 /* InfoPlist.strings */; };
+		DBCA9572188190B700C2CCA1 /* heheTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DBCA9571188190B700C2CCA1 /* heheTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DBCA9569188190B700C2CCA1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DBCA9541188190B600C2CCA1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DBCA9548188190B600C2CCA1;
+			remoteInfo = hehe;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		DBCA9549188190B600C2CCA1 /* hehe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = hehe.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DBCA954C188190B600C2CCA1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		DBCA954E188190B600C2CCA1 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		DBCA9550188190B600C2CCA1 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		DBCA9554188190B600C2CCA1 /* hehe-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "hehe-Info.plist"; sourceTree = "<group>"; };
+		DBCA9556188190B600C2CCA1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		DBCA9558188190B600C2CCA1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		DBCA955A188190B700C2CCA1 /* hehe-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "hehe-Prefix.pch"; sourceTree = "<group>"; };
+		DBCA955B188190B700C2CCA1 /* com_appgame_heheAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = com_appgame_heheAppDelegate.h; sourceTree = "<group>"; };
+		DBCA955C188190B700C2CCA1 /* com_appgame_heheAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = com_appgame_heheAppDelegate.m; sourceTree = "<group>"; };
+		DBCA955E188190B700C2CCA1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		DBCA9564188190B700C2CCA1 /* heheTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = heheTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DBCA9565188190B700C2CCA1 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		DBCA956D188190B700C2CCA1 /* heheTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "heheTests-Info.plist"; sourceTree = "<group>"; };
+		DBCA956F188190B700C2CCA1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		DBCA9571188190B700C2CCA1 /* heheTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = heheTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DBCA9546188190B600C2CCA1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DBCA954F188190B600C2CCA1 /* CoreGraphics.framework in Frameworks */,
+				DBCA9551188190B600C2CCA1 /* UIKit.framework in Frameworks */,
+				DBCA954D188190B600C2CCA1 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DBCA9561188190B700C2CCA1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DBCA9566188190B700C2CCA1 /* XCTest.framework in Frameworks */,
+				DBCA9568188190B700C2CCA1 /* UIKit.framework in Frameworks */,
+				DBCA9567188190B700C2CCA1 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DBCA9540188190B600C2CCA1 = {
+			isa = PBXGroup;
+			children = (
+				DBCA9552188190B600C2CCA1 /* hehe */,
+				DBCA956B188190B700C2CCA1 /* heheTests */,
+				DBCA954B188190B600C2CCA1 /* Frameworks */,
+				DBCA954A188190B600C2CCA1 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DBCA954A188190B600C2CCA1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DBCA9549188190B600C2CCA1 /* hehe.app */,
+				DBCA9564188190B700C2CCA1 /* heheTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DBCA954B188190B600C2CCA1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DBCA954C188190B600C2CCA1 /* Foundation.framework */,
+				DBCA954E188190B600C2CCA1 /* CoreGraphics.framework */,
+				DBCA9550188190B600C2CCA1 /* UIKit.framework */,
+				DBCA9565188190B700C2CCA1 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DBCA9552188190B600C2CCA1 /* hehe */ = {
+			isa = PBXGroup;
+			children = (
+				DBCA955B188190B700C2CCA1 /* com_appgame_heheAppDelegate.h */,
+				DBCA955C188190B700C2CCA1 /* com_appgame_heheAppDelegate.m */,
+				DBCA955E188190B700C2CCA1 /* Images.xcassets */,
+				DBCA9553188190B600C2CCA1 /* Supporting Files */,
+			);
+			path = hehe;
+			sourceTree = "<group>";
+		};
+		DBCA9553188190B600C2CCA1 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DBCA9554188190B600C2CCA1 /* hehe-Info.plist */,
+				DBCA9555188190B600C2CCA1 /* InfoPlist.strings */,
+				DBCA9558188190B600C2CCA1 /* main.m */,
+				DBCA955A188190B700C2CCA1 /* hehe-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DBCA956B188190B700C2CCA1 /* heheTests */ = {
+			isa = PBXGroup;
+			children = (
+				DBCA9571188190B700C2CCA1 /* heheTests.m */,
+				DBCA956C188190B700C2CCA1 /* Supporting Files */,
+			);
+			path = heheTests;
+			sourceTree = "<group>";
+		};
+		DBCA956C188190B700C2CCA1 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DBCA956D188190B700C2CCA1 /* heheTests-Info.plist */,
+				DBCA956E188190B700C2CCA1 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DBCA9548188190B600C2CCA1 /* hehe */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DBCA9575188190B700C2CCA1 /* Build configuration list for PBXNativeTarget "hehe" */;
+			buildPhases = (
+				DBCA9545188190B600C2CCA1 /* Sources */,
+				DBCA9546188190B600C2CCA1 /* Frameworks */,
+				DBCA9547188190B600C2CCA1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = hehe;
+			productName = hehe;
+			productReference = DBCA9549188190B600C2CCA1 /* hehe.app */;
+			productType = "com.apple.product-type.application";
+		};
+		DBCA9563188190B700C2CCA1 /* heheTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DBCA9578188190B700C2CCA1 /* Build configuration list for PBXNativeTarget "heheTests" */;
+			buildPhases = (
+				DBCA9560188190B700C2CCA1 /* Sources */,
+				DBCA9561188190B700C2CCA1 /* Frameworks */,
+				DBCA9562188190B700C2CCA1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DBCA956A188190B700C2CCA1 /* PBXTargetDependency */,
+			);
+			name = heheTests;
+			productName = heheTests;
+			productReference = DBCA9564188190B700C2CCA1 /* heheTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DBCA9541188190B600C2CCA1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = com.appgame.hehe;
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "计 炜";
+				TargetAttributes = {
+					DBCA9563188190B700C2CCA1 = {
+						TestTargetID = DBCA9548188190B600C2CCA1;
+					};
+				};
+			};
+			buildConfigurationList = DBCA9544188190B600C2CCA1 /* Build configuration list for PBXProject "hehe" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = DBCA9540188190B600C2CCA1;
+			productRefGroup = DBCA954A188190B600C2CCA1 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DBCA9548188190B600C2CCA1 /* hehe */,
+				DBCA9563188190B700C2CCA1 /* heheTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DBCA9547188190B600C2CCA1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DBCA9557188190B600C2CCA1 /* InfoPlist.strings in Resources */,
+				DBCA955F188190B700C2CCA1 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DBCA9562188190B700C2CCA1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DBCA9570188190B700C2CCA1 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DBCA9545188190B600C2CCA1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DBCA955D188190B700C2CCA1 /* com_appgame_heheAppDelegate.m in Sources */,
+				DBCA9559188190B600C2CCA1 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DBCA9560188190B700C2CCA1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DBCA9572188190B700C2CCA1 /* heheTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DBCA956A188190B700C2CCA1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DBCA9548188190B600C2CCA1 /* hehe */;
+			targetProxy = DBCA9569188190B700C2CCA1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		DBCA9555188190B600C2CCA1 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DBCA9556188190B600C2CCA1 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		DBCA956E188190B700C2CCA1 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DBCA956F188190B700C2CCA1 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		DBCA9573188190B700C2CCA1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		DBCA9574188190B700C2CCA1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		DBCA9576188190B700C2CCA1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "hehe/hehe-Prefix.pch";
+				INFOPLIST_FILE = "hehe/hehe-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		DBCA9577188190B700C2CCA1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "hehe/hehe-Prefix.pch";
+				INFOPLIST_FILE = "hehe/hehe-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		DBCA9579188190B700C2CCA1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/hehe.app/hehe";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "hehe/hehe-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "heheTests/heheTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		DBCA957A188190B700C2CCA1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/hehe.app/hehe";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "hehe/hehe-Prefix.pch";
+				INFOPLIST_FILE = "heheTests/heheTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DBCA9544188190B600C2CCA1 /* Build configuration list for PBXProject "hehe" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DBCA9573188190B700C2CCA1 /* Debug */,
+				DBCA9574188190B700C2CCA1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DBCA9575188190B700C2CCA1 /* Build configuration list for PBXNativeTarget "hehe" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DBCA9576188190B700C2CCA1 /* Debug */,
+				DBCA9577188190B700C2CCA1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		DBCA9578188190B700C2CCA1 /* Build configuration list for PBXNativeTarget "heheTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DBCA9579188190B700C2CCA1 /* Debug */,
+				DBCA957A188190B700C2CCA1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DBCA9541188190B600C2CCA1 /* Project object */;
+}
