@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-#import "com_appgame_heheAppDelegate.h"
+#import "heheAppDelegate.h"
 
 int main(int argc, char * argv[])
 {
     @autoreleasepool {
-        return UIApplicationMain(argc, argv, nil, NSStringFromClass([com_appgame_heheAppDelegate class]));
+        return UIApplicationMain(argc, argv, nil, NSStringFromClass([heheAppDelegate class]));
     }
 }
