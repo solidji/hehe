@@ -22,6 +22,10 @@
 //#import "FTAnimation.h"
 #import "UIColor+iOS7Colors.h"
 
+#import <AVOSCloud/AVOSCloud.h>
+#import <AVOSCloudSNS.h>
+#import <AVOSCloudSNS/AVUser+SNS.h>
+
 @interface HomeViewController ()
 - (void)revealSidebar;
 - (void)getComments;
@@ -813,6 +817,31 @@
                                }
                                
                                for (ArticleItem *commentItem in _comments) {
+                                   //评论的时候才写到云服务器
+                                   AVQuery *query = [AVQuery queryWithClassName:@"Post"];
+                                   [query whereKey:@"url" equalTo:commentItem.articleURL.absoluteString];
+                                   [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                                       if (!error) {
+                                           // The find succeeded.
+                                           NSLog(@"Successfully retrieved %d scores.", objects.count);
+                                           if (objects.count < 1) {
+                                               AVObject *myPost = [AVObject objectWithClassName:@"Post"];
+                                               [myPost setObject:commentItem.title forKey:@"title"];
+                                               [myPost setObject:commentItem.content forKey:@"content"];
+                                               [myPost setObject:commentItem.articleIconURL.absoluteString forKey:@"icon"];
+                                               [myPost setObject:commentItem.articleURL.absoluteString forKey:@"url"];
+                                               [myPost setObject:commentItem.creator forKey:@"creator"];
+                                               [myPost setObject:commentItem.pubDate forKey:@"pubDate"];
+                                               [myPost setObject:commentItem.description forKey:@"description"];
+                                               [myPost save];
+                                           }
+                                       } else {
+                                           // Log details of the failure
+                                           NSLog(@"Error: %@ %@", error, [error userInfo]);
+                                       }
+                                   }];
+                                   
+                                   
                                    [self.comments addObject:commentItem];
                                }
                                //self.comments = [NSMutableArray arrayWithArray:_comments];
@@ -835,220 +864,6 @@
         //[etActivity stopAnimating];
         //[etActivity removeFromSuperview];
     }];
-    
-//    [jsonapiClient getPath:pathString
-////    AFHTTPClient *jsonapiClient = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:webURL]];
-////    
-////    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
-////                                @"get_posts", @"json",
-////                                @"20", @"count",
-////                                @"attachments", @"exclude",
-////                                starString, @"page",
-////                                nil];
-////    [jsonapiClient getPath:@""
-//                parameters:parameters
-//                   success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//                       
-//                       __block NSString *jsonString = operation.responseString;
-//                       
-//                       //过滤掉w3tc缓存附加在json数据后面的
-//                       /*
-//                        <!-- W3 Total Cache: Page cache debug info:
-//                        Engine:             memcached
-//                        Cache key:          4e14f98a5d7a178df9c7d3251ace098d
-//                        Caching:            enabled
-//                        Status:             not cached
-//                        Creation Time:      2.143s
-//                        Header info:
-//                        X-Powered-By:        PHP/5.4.14-1~precise+1
-//                        X-W3TC-Minify:       On
-//                        Last-Modified:       Sun, 12 May 2013 16:17:48 GMT
-//                        Vary:
-//                        X-Pingback:           http://www.appgame.com/xmlrpc.php
-//                        Content-Type:         application/json; charset=UTF-8
-//                        -->
-//                        */
-//                       NSError *error;
-//                       //(.|\\s)*或([\\s\\S]*)可以匹配包括换行在内的任意字符
-//                       NSRegularExpression *regexW3tc = [NSRegularExpression
-//                                                         regularExpressionWithPattern:@"<!-- W3 Total Cache:([\\s\\S]*)-->"
-//                                                         options:NSRegularExpressionCaseInsensitive
-//                                                         error:&error];
-//                       [regexW3tc enumerateMatchesInString:jsonString
-//                                                   options:0
-//                                                     range:NSMakeRange(0, jsonString.length)
-//                                                usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
-//                                                    jsonString = [jsonString stringByReplacingOccurrencesOfString:[jsonString substringWithRange:result.range] withString:@""];
-//                                                }];
-//                       
-//                       jsonString = [jsonString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-//                       
-//                       NSData *data = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
-//                       // fetch the json response to a dictionary
-//                       NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-//                       // pass it to the block
-//                       // check the code (success is 0)
-//                       NSString *code = [responseDictionary objectForKey:@"status"];
-//                       
-//                       if (![code isEqualToString:@"ok"]) {   // there's an error
-//                           NSLog(@"获取文章json异常:%@",self.webURL);
-//                       }else {
-//                           receiveMember = [[responseDictionary objectForKey:@"count"] integerValue];
-//                           if (receiveMember > 0) {
-//                               NSMutableArray *_comments = [NSMutableArray array];
-//                               // parse into array of comments
-//                               NSArray *commentsArray = [responseDictionary objectForKey:@"posts"];
-//
-//                               // setting date format
-//                               NSDateFormatter *df = [[NSDateFormatter alloc] init];
-//                               NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];
-//                               [df setLocale:locale];
-//                               [df setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-//                               
-//                               // traverse the array, getting data for comments
-//                               for (NSDictionary *commentDictionary in commentsArray) {
-//                                   // for every comment, wrap them with IADisqusComment
-//                                   ArticleItem *aComment = [[ArticleItem alloc] init];
-//                                   
-//                                   aComment.articleIconURL = [NSURL URLWithString:[[commentDictionary objectForKey:@"thumbnail"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-//                                   aComment.pubDate = [df dateFromString:[[commentDictionary objectForKey:@"date"] stringByReplacingOccurrencesOfString:@"T" withString:@" "]];
-//                                   
-//                                   aComment.description = [commentDictionary objectForKey:@"excerpt"];
-//                                   NSString *regEx_html = [commentDictionary objectForKey:@"excerpt"];
-//                                   NSError *error;
-//                                   //(.|\\s)*或([\\s\\S]*)可以匹配包括换行在内的任意字符
-//                                   //NSString *regEx_html = "<[^>]+>";
-//                                   NSRegularExpression *regexW3tc = [NSRegularExpression
-//                                                                     regularExpressionWithPattern:@"<[^>]+>"
-//                                                                     options:NSRegularExpressionCaseInsensitive
-//                                                                     error:&error];
-//                                   [regexW3tc enumerateMatchesInString:regEx_html
-//                                                               options:0
-//                                                                 range:NSMakeRange(0, regEx_html.length)
-//                                                            usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
-//                                                                aComment.description = [aComment.description stringByReplacingOccurrencesOfString:[regEx_html substringWithRange:result.range] withString:@""];
-//                                                            }];
-//                                   
-//                                   aComment.description = [aComment.description stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-//                                   aComment.commentCount = [commentDictionary objectForKey:@"comment_count"];
-//                                   aComment.title = [commentDictionary objectForKey:@"title"];
-//                                   if (aComment.title != nil) {
-//                                       aComment.title = [aComment.title stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-//                                       aComment.title = [aComment.title stringByReplacingOccurrencesOfString:@"&#038;" withString:@"&"];
-//                                       aComment.title = [aComment.title stringByReplacingOccurrencesOfString:@"&#8217;" withString:@"'"];
-//                                       aComment.title = [aComment.title stringByReplacingOccurrencesOfString:@"&#8211;" withString:@"–"];
-//                                       aComment.title = [aComment.title stringByReplacingOccurrencesOfString:@"&#8230;" withString:@"…"];
-//                                       aComment.title = [aComment.title stringByReplacingOccurrencesOfString:@"&#8482;" withString:@"™"];
-//                                       //aComment.title = [aComment.title stringByReplacingOccurrencesOfString:@"&rarr;" withString:@""];
-//                                   }
-//                                   aComment.content = [commentDictionary objectForKey:@"content"];
-//                                   aComment.articleURL = [NSURL URLWithString:[[commentDictionary objectForKey:@"url"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-//                                   aComment.creator = [[commentDictionary objectForKey:@"author"] objectForKey:@"name"];
-//                                   
-//                                   
-//                                   aComment.category = @"apple-news";
-//                                   NSArray *categoriesArray = [commentDictionary objectForKey:@"categories"];
-//                                   if ([categoriesArray count]>0) {
-//                                       for (int i=0; i<[categoriesArray count]; i++) {
-//                                           NSDictionary *categorieDic = categoriesArray[i];
-//                                           NSString *cateSlug = [categorieDic objectForKey:@"slug"];
-//                                           if([cateSlug isEqualToString:@"game-shopping-guide"])
-//                                           {
-//                                               aComment.category = @"game-shopping-guide";
-//                                               break;
-//                                           }else if ([cateSlug isEqualToString:@"featured-apps-collection"])
-//                                           {
-//                                               aComment.category = @"featured-apps-collection";
-//                                               break;
-//                                           }else if ([cateSlug isEqualToString:@"featured-topics"])
-//                                           {
-//                                               aComment.category = @"featured-topics";
-//                                               break;
-//                                           }else if ([cateSlug isEqualToString:@"5-stars"])
-//                                           {
-//                                               aComment.category = @"5-stars";
-//                                               break;
-//                                           }else if ([cateSlug isEqualToString:@"4-stars"])
-//                                           {
-//                                               aComment.category = @"4-stars";
-//                                               break;
-//                                           }else if ([cateSlug isEqualToString:@"3-stars"])
-//                                           {
-//                                               aComment.category = @"3-stars";
-//                                               break;
-//                                           }else if ([cateSlug isEqualToString:@"2-stars"])
-//                                           {
-//                                               aComment.category = @"2-stars";
-//                                               break;
-//                                           }else if ([cateSlug isEqualToString:@"1-star"])
-//                                           {
-//                                               aComment.category = @"1-star";
-//                                               break;
-//                                           }else if ([cateSlug isEqualToString:@"game-reviews"])
-//                                           {
-//                                               aComment.category = @"game-reviews";
-//                                               break;
-//                                           }else if ([cateSlug isEqualToString:@"upcoming-games"])
-//                                           {
-//                                               aComment.category = @"upcoming-games";
-//                                               break;
-//                                           }else if ([cateSlug isEqualToString:@"hot-strategy"])
-//                                           {
-//                                               aComment.category = @"hot-strategy";
-//                                               break;
-//                                           }else if ([cateSlug isEqualToString:@"hot-video"])
-//                                           {
-//                                               aComment.category = @"hot-video";
-//                                               break;
-//                                           }
-//                                       }
-//                                   }
-//                                   
-//                                   
-//                                   NSDateFormatter *df = [[NSDateFormatter alloc] init];
-//                                   NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];
-//                                   [df setLocale:locale];
-//                                   [df setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-//                                   NSDate *pubDate = [df dateFromString:[[commentDictionary objectForKey:@"date"] stringByReplacingOccurrencesOfString:@"T" withString:@" "]];
-//                                   
-//                                   if (aComment.content != nil) {
-//                                       NSString *htmlFilePath = [[NSBundle mainBundle] pathForResource:@"appgame" ofType:@"html"];
-//                                       NSString *htmlString = [NSString stringWithContentsOfFile:htmlFilePath encoding:NSUTF8StringEncoding error:nil];
-//                                       NSString *contentHtml = @"";
-//                                       NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-//                                       [dateFormatter setDateFormat:@"YYYY-MM-dd HH:mm"];
-//                                       contentHtml = [contentHtml stringByAppendingFormat:htmlString,
-//                                                      aComment.title, aComment.creator, [dateFormatter stringFromDate:pubDate], aComment.commentCount];
-//                                       contentHtml = [contentHtml stringByReplacingOccurrencesOfString:@"<!--content-->" withString:aComment.content];
-//                                       aComment.content = contentHtml;
-//                                   }
-//                                   // add the comment to the mutable array
-//                                   [_comments addObject:aComment];
-//                               }
-//                               
-//                               for (ArticleItem *commentItem in _comments) {
-//                                   [self.comments addObject:commentItem];
-//                               }
-//                               //self.comments = [NSMutableArray arrayWithArray:_comments];
-//                           }
-//                           //到这里就是0条数据
-//                       }
-//                       //[alerViewManager dismissMessageView:self.view];
-//                       [self performSelectorOnMainThread:@selector(updateTableView) withObject:nil waitUntilDone:NO];
-//                       [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-//                       updating = NO;
-//                       //[etActivity stopAnimating];
-//                       //[etActivity removeFromSuperview];
-//                   }
-//                   failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//                       // pass error to the block
-//                       NSLog(@"获取文章json失败:%@",error);
-//                       [self performSelectorOnMainThread:@selector(updateTableView) withObject:nil waitUntilDone:NO];
-//                       //[alerViewManager dismissMessageView:self.view];
-//                       [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-//                       //[etActivity stopAnimating];
-//                       //[etActivity removeFromSuperview];
-//                   }];
 }
 
 @end
