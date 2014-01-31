@@ -92,7 +92,7 @@ static SlideNavigationController *singletonInstance;
 	self.menuRevealAnimation = MenuRevealAnimationSlideAndFade;
 	self.landscapeSlideOffset = MENU_DEFAULT_SLIDE_OFFSET;
 	self.portraitSlideOffset = MENU_DEFAULT_SLIDE_OFFSET;
-	self.avoidSwitchingToSameClassViewController = YES;
+	self.avoidSwitchingToSameClassViewController = NO;
 	singletonInstance = self;
 	self.delegate = self;
 	
@@ -238,9 +238,29 @@ static SlideNavigationController *singletonInstance;
 	}
 	else
 	{
-		UIImage *image = [UIImage imageNamed:MENU_IMAGE];
-        return [[UIBarButtonItem alloc] initWithImage:image style:UIBarButtonItemStylePlain target:self action:selector];
-	}
+		//UIImage *image = [UIImage imageNamed:MENU_IMAGE];
+        
+        UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        UIImage *imgBtn = [UIImage imageNamed:MENU_IMAGE];
+        CGRect rect;
+        rect = leftButton.frame;
+        rect.size  = imgBtn.size;            // set button size as image size
+        leftButton.frame = rect;
+        
+        [leftButton setBackgroundImage:imgBtn forState:UIControlStateNormal];
+        [leftButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+        [leftButton setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+        [leftButton setShowsTouchWhenHighlighted:YES];
+        
+        [leftButton addTarget:self action:selector forControlEvents:UIControlEventTouchUpInside];
+        
+        UIBarButtonItem *temporaryLeftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
+        temporaryLeftBarButtonItem.style = UIBarButtonItemStylePlain;
+        //self.navigationItem.leftBarButtonItem = temporaryLeftBarButtonItem;
+        
+        //return [[UIBarButtonItem alloc] initWithImage:image style:UIBarButtonItemStylePlain target:self action:selector];
+        return temporaryLeftBarButtonItem;
+    }
 }
 
 - (BOOL)isMenuOpen

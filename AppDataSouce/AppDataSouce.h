@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "IADisqusUser.h"
-#import "AFOAuth2Client.h"
-#import "GHMenuViewController.h"
+//#import "IADisqusUser.h"
+//#import "AFOAuth2Client.h"
+//#import "GHMenuViewController.h"
 
 @interface AppDataSouce : NSObject
 {
@@ -24,9 +24,9 @@
 @property (nonatomic, retain) NSString          *api_key;
 @property (nonatomic) BOOL                      isLogin;
 
-@property (nonatomic, retain) GHMenuViewController      *menuController;
-@property (nonatomic, retain) IADisqusUser              *userObject;
-@property (nonatomic, retain) AFOAuthCredential       *credentialObject;
+//@property (nonatomic, retain) GHMenuViewController      *menuController;
+//@property (nonatomic, retain) IADisqusUser              *userObject;
+//@property (nonatomic, retain) AFOAuthCredential       *credentialObject;
 
 @property (nonatomic, retain) NSMutableArray          *reviewPromoList;
 @property (nonatomic, retain) NSMutableArray          *reviewList;

@@ -27,6 +27,7 @@
 
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
+#import "MDSlideNavigationViewController.h"
 
 @protocol SlideNavigationControllerDelegate <NSObject>
 @optional
@@ -46,7 +47,7 @@ typedef  enum{
 	MenuRevealAnimationSlideAndFade
 }MenuRevealAnimation;
 
-@interface SlideNavigationController : UINavigationController <UINavigationControllerDelegate>
+@interface SlideNavigationController : MDSlideNavigationViewController <UINavigationControllerDelegate>
 
 @property (nonatomic, assign) BOOL avoidSwitchingToSameClassViewController;
 @property (nonatomic, assign) BOOL enableSwipeGesture;

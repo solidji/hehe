@@ -8,6 +8,8 @@
 
 #import "Globle.h"
 
+//typedef void (^RevealBlock)();
+
 @implementation Globle
 
 @synthesize globleWidth, globleHeight, globleAllHeight;

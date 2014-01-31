@@ -12,9 +12,9 @@
 
 @synthesize username,password,remote_auth_s3,api_key;//登录相关信息
 
-@synthesize menuController;
-@synthesize userObject;
-@synthesize credentialObject;
+//@synthesize menuController;
+//@synthesize userObject;
+//@synthesize credentialObject;
 
 @synthesize reviewPromoList;
 @synthesize reviewList;
@@ -51,15 +51,15 @@
 - (id)init {
     self = [super init];
     if (self) {
-        GHMenuViewController *menu = [[GHMenuViewController alloc] init];
-        self.menuController = menu;
-        
-        IADisqusUser *user = [[IADisqusUser alloc] init];
-        self.userObject = user;
-
-        
-        AFOAuthCredential *credential = [[AFOAuthCredential alloc] init];
-        self.credentialObject = credential;
+//        GHMenuViewController *menu = [[GHMenuViewController alloc] init];
+//        self.menuController = menu;
+//        
+//        IADisqusUser *user = [[IADisqusUser alloc] init];
+//        self.userObject = user;
+//
+//        
+//        AFOAuthCredential *credential = [[AFOAuthCredential alloc] init];
+//        self.credentialObject = credential;
         
         //评测
         NSMutableArray *reviewPromoArray = [[NSMutableArray alloc] init];
