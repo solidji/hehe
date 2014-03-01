@@ -195,13 +195,13 @@ static SlideNavigationController *singletonInstance;
 
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
-	if ([self isMenuOpen])
-	{
-		[self closeMenuWithCompletion:^{
-			[super pushViewController:viewController animated:animated];
-		}];
-	}
-	else
+//	if ([self isMenuOpen])
+//	{
+//		[self closeMenuWithCompletion:^{
+//			[super pushViewController:viewController animated:animated];
+//		}];
+//	}
+//	else
 	{
 		[super pushViewController:viewController animated:animated];
 	}

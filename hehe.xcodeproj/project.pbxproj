@@ -41,6 +41,38 @@
 		DB05F517188DB2BF003F9DA9 /* leftMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB05F516188DB2BF003F9DA9 /* leftMenuViewController.m */; };
 		DB05F51A188DB399003F9DA9 /* leftMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DB05F519188DB399003F9DA9 /* leftMenuCell.m */; };
 		DB0E196D189947AE00F597FE /* rightMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB0E196C189947AE00F597FE /* rightMenuViewController.m */; };
+		DB0F629D18BA7E8700424BCD /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB0F629C18BA7E8700424BCD /* ProfileViewController.m */; };
+		DB0F62A018BBC64600424BCD /* SignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB0F629F18BBC64600424BCD /* SignupViewController.m */; };
+		DB106D6518B0AD1100F5CC43 /* MJRefresh.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DB106D5B18B0AD1100F5CC43 /* MJRefresh.bundle */; };
+		DB106D6618B0AD1100F5CC43 /* MJRefreshBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB106D5E18B0AD1100F5CC43 /* MJRefreshBaseView.m */; };
+		DB106D6718B0AD1100F5CC43 /* MJRefreshConst.m in Sources */ = {isa = PBXBuildFile; fileRef = DB106D6018B0AD1100F5CC43 /* MJRefreshConst.m */; };
+		DB106D6818B0AD1100F5CC43 /* MJRefreshFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB106D6218B0AD1100F5CC43 /* MJRefreshFooterView.m */; };
+		DB106D6918B0AD1100F5CC43 /* MJRefreshHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB106D6418B0AD1100F5CC43 /* MJRefreshHeaderView.m */; };
+		DB106D6C18B509D200F5CC43 /* SigninViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB106D6B18B509D200F5CC43 /* SigninViewController.m */; };
+		DB106D7218B5331000F5CC43 /* CustomTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = DB106D6F18B5331000F5CC43 /* CustomTextField.m */; };
+		DB106D7318B5331000F5CC43 /* MHTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = DB106D7118B5331000F5CC43 /* MHTextField.m */; };
+		DB204014189E7EC50007BFA6 /* SVModalWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB204010189E7EC50007BFA6 /* SVModalWebViewController.m */; };
+		DB204015189E7EC50007BFA6 /* SVWebViewController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DB204011189E7EC50007BFA6 /* SVWebViewController.bundle */; };
+		DB204016189E7EC50007BFA6 /* SVWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB204013189E7EC50007BFA6 /* SVWebViewController.m */; };
+		DB204019189E7F7D0007BFA6 /* GHRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB204018189E7F7D0007BFA6 /* GHRootViewController.m */; };
+		DB2040A4189FEE450007BFA6 /* ELHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB2040A1189FEE450007BFA6 /* ELHeaderView.m */; };
+		DB2040A5189FEE450007BFA6 /* ELViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB2040A3189FEE450007BFA6 /* ELViewController.m */; };
+		DB5FC055189BCD47008E4C9F /* KYICircleMenuButton01.png in Resources */ = {isa = PBXBuildFile; fileRef = DB5FC045189BCD47008E4C9F /* KYICircleMenuButton01.png */; };
+		DB5FC056189BCD47008E4C9F /* KYICircleMenuButton01@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DB5FC046189BCD47008E4C9F /* KYICircleMenuButton01@2x.png */; };
+		DB5FC057189BCD47008E4C9F /* KYICircleMenuButton02.png in Resources */ = {isa = PBXBuildFile; fileRef = DB5FC047189BCD47008E4C9F /* KYICircleMenuButton02.png */; };
+		DB5FC058189BCD47008E4C9F /* KYICircleMenuButton02@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DB5FC048189BCD47008E4C9F /* KYICircleMenuButton02@2x.png */; };
+		DB5FC059189BCD47008E4C9F /* KYICircleMenuButton03.png in Resources */ = {isa = PBXBuildFile; fileRef = DB5FC049189BCD47008E4C9F /* KYICircleMenuButton03.png */; };
+		DB5FC05A189BCD47008E4C9F /* KYICircleMenuButton03@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DB5FC04A189BCD47008E4C9F /* KYICircleMenuButton03@2x.png */; };
+		DB5FC05B189BCD47008E4C9F /* KYICircleMenuButton04.png in Resources */ = {isa = PBXBuildFile; fileRef = DB5FC04B189BCD47008E4C9F /* KYICircleMenuButton04.png */; };
+		DB5FC05C189BCD47008E4C9F /* KYICircleMenuButton04@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DB5FC04C189BCD47008E4C9F /* KYICircleMenuButton04@2x.png */; };
+		DB5FC05D189BCD47008E4C9F /* KYICircleMenuButton05.png in Resources */ = {isa = PBXBuildFile; fileRef = DB5FC04D189BCD47008E4C9F /* KYICircleMenuButton05.png */; };
+		DB5FC05E189BCD47008E4C9F /* KYICircleMenuButton05@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DB5FC04E189BCD47008E4C9F /* KYICircleMenuButton05@2x.png */; };
+		DB5FC05F189BCD47008E4C9F /* KYICircleMenuButton06.png in Resources */ = {isa = PBXBuildFile; fileRef = DB5FC04F189BCD47008E4C9F /* KYICircleMenuButton06.png */; };
+		DB5FC060189BCD47008E4C9F /* KYICircleMenuButton06@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DB5FC050189BCD47008E4C9F /* KYICircleMenuButton06@2x.png */; };
+		DB5FC061189BCD47008E4C9F /* KYICircleMenuCenterButton.png in Resources */ = {isa = PBXBuildFile; fileRef = DB5FC051189BCD47008E4C9F /* KYICircleMenuCenterButton.png */; };
+		DB5FC062189BCD47008E4C9F /* KYICircleMenuCenterButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DB5FC052189BCD47008E4C9F /* KYICircleMenuCenterButton@2x.png */; };
+		DB5FC063189BCD47008E4C9F /* KYICircleMenuCenterButtonBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = DB5FC053189BCD47008E4C9F /* KYICircleMenuCenterButtonBackground.png */; };
+		DB5FC064189BCD47008E4C9F /* KYICircleMenuCenterButtonBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DB5FC054189BCD47008E4C9F /* KYICircleMenuCenterButtonBackground@2x.png */; };
 		DBCA954D188190B600C2CCA1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBCA954C188190B600C2CCA1 /* Foundation.framework */; };
 		DBCA954F188190B600C2CCA1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBCA954E188190B600C2CCA1 /* CoreGraphics.framework */; };
 		DBCA9551188190B600C2CCA1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBCA9550188190B600C2CCA1 /* UIKit.framework */; };
@@ -291,6 +323,9 @@
 		DBCA979C1883347400C2CCA1 /* ZGAppGame4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DBCA96EE1883347400C2CCA1 /* ZGAppGame4@2x.png */; };
 		DBCA979D1883347400C2CCA1 /* ZGAppGame5.png in Resources */ = {isa = PBXBuildFile; fileRef = DBCA96EF1883347400C2CCA1 /* ZGAppGame5.png */; };
 		DBCA979E1883347400C2CCA1 /* ZGAppGame5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DBCA96F01883347400C2CCA1 /* ZGAppGame5@2x.png */; };
+		DBD0548318BF33ED00C62811 /* TimelineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBD0548218BF33ED00C62811 /* TimelineViewController.m */; };
+		DBE3460418C0F23300FAC3FB /* timelineBg.png in Resources */ = {isa = PBXBuildFile; fileRef = DBE3460218C0F23300FAC3FB /* timelineBg.png */; };
+		DBE3460518C0F23300FAC3FB /* timelineBg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DBE3460318C0F23300FAC3FB /* timelineBg@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -357,6 +392,53 @@
 		DB05F519188DB399003F9DA9 /* leftMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = leftMenuCell.m; sourceTree = "<group>"; };
 		DB0E196B189947AE00F597FE /* rightMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rightMenuViewController.h; sourceTree = "<group>"; };
 		DB0E196C189947AE00F597FE /* rightMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = rightMenuViewController.m; sourceTree = "<group>"; };
+		DB0F629B18BA7E8700424BCD /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		DB0F629C18BA7E8700424BCD /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		DB0F629E18BBC64600424BCD /* SignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignupViewController.h; sourceTree = "<group>"; };
+		DB0F629F18BBC64600424BCD /* SignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignupViewController.m; sourceTree = "<group>"; };
+		DB106D5B18B0AD1100F5CC43 /* MJRefresh.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MJRefresh.bundle; sourceTree = "<group>"; };
+		DB106D5C18B0AD1100F5CC43 /* MJRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefresh.h; sourceTree = "<group>"; };
+		DB106D5D18B0AD1100F5CC43 /* MJRefreshBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshBaseView.h; sourceTree = "<group>"; };
+		DB106D5E18B0AD1100F5CC43 /* MJRefreshBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshBaseView.m; sourceTree = "<group>"; };
+		DB106D5F18B0AD1100F5CC43 /* MJRefreshConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshConst.h; sourceTree = "<group>"; };
+		DB106D6018B0AD1100F5CC43 /* MJRefreshConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshConst.m; sourceTree = "<group>"; };
+		DB106D6118B0AD1100F5CC43 /* MJRefreshFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshFooterView.h; sourceTree = "<group>"; };
+		DB106D6218B0AD1100F5CC43 /* MJRefreshFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshFooterView.m; sourceTree = "<group>"; };
+		DB106D6318B0AD1100F5CC43 /* MJRefreshHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshHeaderView.h; sourceTree = "<group>"; };
+		DB106D6418B0AD1100F5CC43 /* MJRefreshHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshHeaderView.m; sourceTree = "<group>"; };
+		DB106D6A18B509D200F5CC43 /* SigninViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SigninViewController.h; sourceTree = "<group>"; };
+		DB106D6B18B509D200F5CC43 /* SigninViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SigninViewController.m; sourceTree = "<group>"; };
+		DB106D6E18B5331000F5CC43 /* CustomTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTextField.h; sourceTree = "<group>"; };
+		DB106D6F18B5331000F5CC43 /* CustomTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTextField.m; sourceTree = "<group>"; };
+		DB106D7018B5331000F5CC43 /* MHTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHTextField.h; sourceTree = "<group>"; };
+		DB106D7118B5331000F5CC43 /* MHTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHTextField.m; sourceTree = "<group>"; };
+		DB20400F189E7EC50007BFA6 /* SVModalWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVModalWebViewController.h; sourceTree = "<group>"; };
+		DB204010189E7EC50007BFA6 /* SVModalWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVModalWebViewController.m; sourceTree = "<group>"; };
+		DB204011189E7EC50007BFA6 /* SVWebViewController.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVWebViewController.bundle; sourceTree = "<group>"; };
+		DB204012189E7EC50007BFA6 /* SVWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVWebViewController.h; sourceTree = "<group>"; };
+		DB204013189E7EC50007BFA6 /* SVWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVWebViewController.m; sourceTree = "<group>"; };
+		DB204017189E7F7D0007BFA6 /* GHRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GHRootViewController.h; sourceTree = "<group>"; };
+		DB204018189E7F7D0007BFA6 /* GHRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHRootViewController.m; sourceTree = "<group>"; };
+		DB2040A0189FEE450007BFA6 /* ELHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELHeaderView.h; sourceTree = "<group>"; };
+		DB2040A1189FEE450007BFA6 /* ELHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELHeaderView.m; sourceTree = "<group>"; };
+		DB2040A2189FEE450007BFA6 /* ELViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELViewController.h; sourceTree = "<group>"; };
+		DB2040A3189FEE450007BFA6 /* ELViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELViewController.m; sourceTree = "<group>"; };
+		DB5FC045189BCD47008E4C9F /* KYICircleMenuButton01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = KYICircleMenuButton01.png; sourceTree = "<group>"; };
+		DB5FC046189BCD47008E4C9F /* KYICircleMenuButton01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "KYICircleMenuButton01@2x.png"; sourceTree = "<group>"; };
+		DB5FC047189BCD47008E4C9F /* KYICircleMenuButton02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = KYICircleMenuButton02.png; sourceTree = "<group>"; };
+		DB5FC048189BCD47008E4C9F /* KYICircleMenuButton02@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "KYICircleMenuButton02@2x.png"; sourceTree = "<group>"; };
+		DB5FC049189BCD47008E4C9F /* KYICircleMenuButton03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = KYICircleMenuButton03.png; sourceTree = "<group>"; };
+		DB5FC04A189BCD47008E4C9F /* KYICircleMenuButton03@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "KYICircleMenuButton03@2x.png"; sourceTree = "<group>"; };
+		DB5FC04B189BCD47008E4C9F /* KYICircleMenuButton04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = KYICircleMenuButton04.png; sourceTree = "<group>"; };
+		DB5FC04C189BCD47008E4C9F /* KYICircleMenuButton04@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "KYICircleMenuButton04@2x.png"; sourceTree = "<group>"; };
+		DB5FC04D189BCD47008E4C9F /* KYICircleMenuButton05.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = KYICircleMenuButton05.png; sourceTree = "<group>"; };
+		DB5FC04E189BCD47008E4C9F /* KYICircleMenuButton05@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "KYICircleMenuButton05@2x.png"; sourceTree = "<group>"; };
+		DB5FC04F189BCD47008E4C9F /* KYICircleMenuButton06.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = KYICircleMenuButton06.png; sourceTree = "<group>"; };
+		DB5FC050189BCD47008E4C9F /* KYICircleMenuButton06@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "KYICircleMenuButton06@2x.png"; sourceTree = "<group>"; };
+		DB5FC051189BCD47008E4C9F /* KYICircleMenuCenterButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = KYICircleMenuCenterButton.png; sourceTree = "<group>"; };
+		DB5FC052189BCD47008E4C9F /* KYICircleMenuCenterButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "KYICircleMenuCenterButton@2x.png"; sourceTree = "<group>"; };
+		DB5FC053189BCD47008E4C9F /* KYICircleMenuCenterButtonBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = KYICircleMenuCenterButtonBackground.png; sourceTree = "<group>"; };
+		DB5FC054189BCD47008E4C9F /* KYICircleMenuCenterButtonBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "KYICircleMenuCenterButtonBackground@2x.png"; sourceTree = "<group>"; };
 		DBCA9549188190B600C2CCA1 /* hehe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = hehe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBCA954C188190B600C2CCA1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DBCA954E188190B600C2CCA1 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -634,6 +716,10 @@
 		DBCA96EE1883347400C2CCA1 /* ZGAppGame4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ZGAppGame4@2x.png"; sourceTree = "<group>"; };
 		DBCA96EF1883347400C2CCA1 /* ZGAppGame5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ZGAppGame5.png; sourceTree = "<group>"; };
 		DBCA96F01883347400C2CCA1 /* ZGAppGame5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ZGAppGame5@2x.png"; sourceTree = "<group>"; };
+		DBD0548118BF33ED00C62811 /* TimelineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimelineViewController.h; sourceTree = "<group>"; };
+		DBD0548218BF33ED00C62811 /* TimelineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimelineViewController.m; sourceTree = "<group>"; };
+		DBE3460218C0F23300FAC3FB /* timelineBg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = timelineBg.png; sourceTree = "<group>"; };
+		DBE3460318C0F23300FAC3FB /* timelineBg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "timelineBg@2x.png"; sourceTree = "<group>"; };
 		F711645C56AF425481F6C662 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -741,6 +827,82 @@
 			path = Custom;
 			sourceTree = "<group>";
 		};
+		DB106D5A18B0AD1100F5CC43 /* MJRefresh */ = {
+			isa = PBXGroup;
+			children = (
+				DB106D5B18B0AD1100F5CC43 /* MJRefresh.bundle */,
+				DB106D5C18B0AD1100F5CC43 /* MJRefresh.h */,
+				DB106D5D18B0AD1100F5CC43 /* MJRefreshBaseView.h */,
+				DB106D5E18B0AD1100F5CC43 /* MJRefreshBaseView.m */,
+				DB106D5F18B0AD1100F5CC43 /* MJRefreshConst.h */,
+				DB106D6018B0AD1100F5CC43 /* MJRefreshConst.m */,
+				DB106D6118B0AD1100F5CC43 /* MJRefreshFooterView.h */,
+				DB106D6218B0AD1100F5CC43 /* MJRefreshFooterView.m */,
+				DB106D6318B0AD1100F5CC43 /* MJRefreshHeaderView.h */,
+				DB106D6418B0AD1100F5CC43 /* MJRefreshHeaderView.m */,
+			);
+			path = MJRefresh;
+			sourceTree = "<group>";
+		};
+		DB106D6D18B5331000F5CC43 /* MHTextField */ = {
+			isa = PBXGroup;
+			children = (
+				DB106D6E18B5331000F5CC43 /* CustomTextField.h */,
+				DB106D6F18B5331000F5CC43 /* CustomTextField.m */,
+				DB106D7018B5331000F5CC43 /* MHTextField.h */,
+				DB106D7118B5331000F5CC43 /* MHTextField.m */,
+			);
+			path = MHTextField;
+			sourceTree = "<group>";
+		};
+		DB20400E189E7EC50007BFA6 /* SVWebViewController */ = {
+			isa = PBXGroup;
+			children = (
+				DB204017189E7F7D0007BFA6 /* GHRootViewController.h */,
+				DB204018189E7F7D0007BFA6 /* GHRootViewController.m */,
+				DB20400F189E7EC50007BFA6 /* SVModalWebViewController.h */,
+				DB204010189E7EC50007BFA6 /* SVModalWebViewController.m */,
+				DB204011189E7EC50007BFA6 /* SVWebViewController.bundle */,
+				DB204012189E7EC50007BFA6 /* SVWebViewController.h */,
+				DB204013189E7EC50007BFA6 /* SVWebViewController.m */,
+			);
+			path = SVWebViewController;
+			sourceTree = "<group>";
+		};
+		DB20409F189FEE450007BFA6 /* elNav */ = {
+			isa = PBXGroup;
+			children = (
+				DB2040A0189FEE450007BFA6 /* ELHeaderView.h */,
+				DB2040A1189FEE450007BFA6 /* ELHeaderView.m */,
+				DB2040A2189FEE450007BFA6 /* ELViewController.h */,
+				DB2040A3189FEE450007BFA6 /* ELViewController.m */,
+			);
+			path = elNav;
+			sourceTree = "<group>";
+		};
+		DB5FC044189BCD47008E4C9F /* KYICircle */ = {
+			isa = PBXGroup;
+			children = (
+				DB5FC045189BCD47008E4C9F /* KYICircleMenuButton01.png */,
+				DB5FC046189BCD47008E4C9F /* KYICircleMenuButton01@2x.png */,
+				DB5FC047189BCD47008E4C9F /* KYICircleMenuButton02.png */,
+				DB5FC048189BCD47008E4C9F /* KYICircleMenuButton02@2x.png */,
+				DB5FC049189BCD47008E4C9F /* KYICircleMenuButton03.png */,
+				DB5FC04A189BCD47008E4C9F /* KYICircleMenuButton03@2x.png */,
+				DB5FC04B189BCD47008E4C9F /* KYICircleMenuButton04.png */,
+				DB5FC04C189BCD47008E4C9F /* KYICircleMenuButton04@2x.png */,
+				DB5FC04D189BCD47008E4C9F /* KYICircleMenuButton05.png */,
+				DB5FC04E189BCD47008E4C9F /* KYICircleMenuButton05@2x.png */,
+				DB5FC04F189BCD47008E4C9F /* KYICircleMenuButton06.png */,
+				DB5FC050189BCD47008E4C9F /* KYICircleMenuButton06@2x.png */,
+				DB5FC051189BCD47008E4C9F /* KYICircleMenuCenterButton.png */,
+				DB5FC052189BCD47008E4C9F /* KYICircleMenuCenterButton@2x.png */,
+				DB5FC053189BCD47008E4C9F /* KYICircleMenuCenterButtonBackground.png */,
+				DB5FC054189BCD47008E4C9F /* KYICircleMenuCenterButtonBackground@2x.png */,
+			);
+			path = KYICircle;
+			sourceTree = "<group>";
+		};
 		DBCA9540188190B600C2CCA1 = {
 			isa = PBXGroup;
 			children = (
@@ -843,12 +1005,15 @@
 		DBCA957B1882E85100C2CCA1 /* otherLib */ = {
 			isa = PBXGroup;
 			children = (
+				DB106D6D18B5331000F5CC43 /* MHTextField */,
+				DBCA95AB1882EDCB00C2CCA1 /* JYTextField */,
+				DB106D5A18B0AD1100F5CC43 /* MJRefresh */,
+				DB20409F189FEE450007BFA6 /* elNav */,
 				D297C4541883F5010047AD45 /* JMTabView */,
 				DBCA963E1883294500C2CCA1 /* MDSlideNavigation */,
 				DBCA96321882F28F00C2CCA1 /* TFIndicatorView */,
 				DBCA95901882EDCB00C2CCA1 /* AKSegmentedControl */,
 				DBCA959B1882EDCB00C2CCA1 /* AlerViewManager */,
-				DBCA95AB1882EDCB00C2CCA1 /* JYTextField */,
 				DBCA95AE1882EDCB00C2CCA1 /* MBSwitch */,
 				DBCA95B11882EDCB00C2CCA1 /* PullToRefresh&ScrollPage */,
 				DBCA95C91882EDCB00C2CCA1 /* YIPopupTextView */,
@@ -870,6 +1035,7 @@
 		DBCA95801882E93900C2CCA1 /* myViewControll */ = {
 			isa = PBXGroup;
 			children = (
+				DB20400E189E7EC50007BFA6 /* SVWebViewController */,
 				D2652CC41887E9AE00FF020D /* HomeTabViewController.h */,
 				D2652CC51887E9AE00FF020D /* HomeTabViewController.m */,
 				DBCA95F61882EE2400C2CCA1 /* ArticleItem.h */,
@@ -880,12 +1046,20 @@
 				DBCA95821882E93900C2CCA1 /* HomeViewCell.m */,
 				DBCA95831882E93900C2CCA1 /* HomeViewController.h */,
 				DBCA95841882E93900C2CCA1 /* HomeViewController.m */,
+				DBD0548118BF33ED00C62811 /* TimelineViewController.h */,
+				DBD0548218BF33ED00C62811 /* TimelineViewController.m */,
 				DB05F515188DB2BF003F9DA9 /* leftMenuViewController.h */,
 				DB05F516188DB2BF003F9DA9 /* leftMenuViewController.m */,
 				DB05F518188DB399003F9DA9 /* leftMenuCell.h */,
 				DB05F519188DB399003F9DA9 /* leftMenuCell.m */,
 				DB0E196B189947AE00F597FE /* rightMenuViewController.h */,
 				DB0E196C189947AE00F597FE /* rightMenuViewController.m */,
+				DB106D6A18B509D200F5CC43 /* SigninViewController.h */,
+				DB106D6B18B509D200F5CC43 /* SigninViewController.m */,
+				DB0F629E18BBC64600424BCD /* SignupViewController.h */,
+				DB0F629F18BBC64600424BCD /* SignupViewController.m */,
+				DB0F629B18BA7E8700424BCD /* ProfileViewController.h */,
+				DB0F629C18BA7E8700424BCD /* ProfileViewController.m */,
 			);
 			path = myViewControll;
 			sourceTree = "<group>";
@@ -1019,6 +1193,9 @@
 		DBCA96421883347400C2CCA1 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				DB5FC044189BCD47008E4C9F /* KYICircle */,
+				DBE3460218C0F23300FAC3FB /* timelineBg.png */,
+				DBE3460318C0F23300FAC3FB /* timelineBg@2x.png */,
 				D2652CDF1887F85900FF020D /* tabbarbg.png */,
 				D2652CE01887F85900FF020D /* tabbarbg@2x.png */,
 				D2652CC71887F7CE00FF020D /* fot-icon-four.png */,
@@ -1275,6 +1452,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				"zh-Hans",
 			);
 			mainGroup = DBCA9540188190B600C2CCA1;
 			productRefGroup = DBCA954A188190B600C2CCA1 /* Products */;
@@ -1302,6 +1480,7 @@
 				DBCA97601883347400C2CCA1 /* rating-2@2x.png in Resources */,
 				DBCA95EC1882EDCC00C2CCA1 /* ScrollPageControlE@2x.png in Resources */,
 				DBCA96F21883347400C2CCA1 /* 38-27-fabu@2x.png in Resources */,
+				DB5FC05E189BCD47008E4C9F /* KYICircleMenuButton05@2x.png in Resources */,
 				DBCA976F1883347400C2CCA1 /* Reply.png in Resources */,
 				DBCA96221882EEFE00C2CCA1 /* Icon@2x.png in Resources */,
 				DBCA97361883347400C2CCA1 /* lift.png in Resources */,
@@ -1310,18 +1489,21 @@
 				DBCA95F11882EDCC00C2CCA1 /* tableHeadHolder.png in Resources */,
 				DBCA97981883347400C2CCA1 /* ZGAppGame2@2x.png in Resources */,
 				DBCA97911883347400C2CCA1 /* video.png in Resources */,
+				DB5FC062189BCD47008E4C9F /* KYICircleMenuCenterButton@2x.png in Resources */,
 				DBCA97381883347400C2CCA1 /* like-gray.png in Resources */,
 				DBCA974F1883347400C2CCA1 /* noavatar.png in Resources */,
 				D2652CDC1887F7CE00FF020D /* fot-selected@2x.png in Resources */,
 				DBCA97011883347400C2CCA1 /* Comment-Right@2x.png in Resources */,
 				DBCA977F1883347400C2CCA1 /* Share_tool.png in Resources */,
 				DBCA97061883347400C2CCA1 /* Discuss.png in Resources */,
+				DB5FC061189BCD47008E4C9F /* KYICircleMenuCenterButton.png in Resources */,
 				DBCA96FE1883347400C2CCA1 /* Collection.png in Resources */,
 				DBCA97391883347400C2CCA1 /* like-gray@2x.png in Resources */,
 				DBCA970B1883347400C2CCA1 /* dotRed@2x.png in Resources */,
 				DBCA970C1883347400C2CCA1 /* dotted-pattern.png in Resources */,
 				DBCA961E1882EEFE00C2CCA1 /* Icon-Small-50@2x.png in Resources */,
 				DBCA97641883347400C2CCA1 /* rating-4@2x.png in Resources */,
+				DBE3460418C0F23300FAC3FB /* timelineBg.png in Resources */,
 				DBCA971F1883347400C2CCA1 /* guanzhu-gray.png in Resources */,
 				DBCA97321883347400C2CCA1 /* jia-guanzhu.png in Resources */,
 				DBCA97131883347400C2CCA1 /* Favorite@2x.png in Resources */,
@@ -1352,6 +1534,7 @@
 				DBCA97181883347400C2CCA1 /* fot@2x.png in Resources */,
 				DBCA96261882EEFE00C2CCA1 /* iTunesArtwork@2x.png in Resources */,
 				DBCA97281883347400C2CCA1 /* IconPlaceholder.png in Resources */,
+				DB5FC057189BCD47008E4C9F /* KYICircleMenuButton02.png in Resources */,
 				DBCA971C1883347400C2CCA1 /* GreenAlert@2x.png in Resources */,
 				DBCA97111883347400C2CCA1 /* Dynamic@2x.png in Resources */,
 				D2652CD51887F7CE00FF020D /* fot-icon-one.png in Resources */,
@@ -1397,6 +1580,7 @@
 				DBCA97961883347400C2CCA1 /* ZGAppGame1@2x.png in Resources */,
 				DBCA95D51882EDCB00C2CCA1 /* settings-icon@2x.png in Resources */,
 				DBCA97561883347400C2CCA1 /* person@2x.png in Resources */,
+				DB5FC05B189BCD47008E4C9F /* KYICircleMenuButton04.png in Resources */,
 				DBCA975C1883347400C2CCA1 /* Praise@2x.png in Resources */,
 				DBCA97171883347400C2CCA1 /* fot.png in Resources */,
 				DBCA95E11882EDCB00C2CCA1 /* active.png in Resources */,
@@ -1409,6 +1593,9 @@
 				DBCA97541883347400C2CCA1 /* person-white@2x.png in Resources */,
 				DBCA974C1883347400C2CCA1 /* Message-Box-Short@2x.png in Resources */,
 				DBCA97731883347400C2CCA1 /* Review.png in Resources */,
+				DB5FC055189BCD47008E4C9F /* KYICircleMenuButton01.png in Resources */,
+				DB5FC059189BCD47008E4C9F /* KYICircleMenuButton03.png in Resources */,
+				DB5FC05F189BCD47008E4C9F /* KYICircleMenuButton06.png in Resources */,
 				DBCA97651883347400C2CCA1 /* rating-5.png in Resources */,
 				DBCA97801883347400C2CCA1 /* Share_tool@2x.png in Resources */,
 				DBCA979B1883347400C2CCA1 /* ZGAppGame4.png in Resources */,
@@ -1423,13 +1610,18 @@
 				DBCA96FF1883347400C2CCA1 /* Collection@2x.png in Resources */,
 				DBCA95E21882EDCB00C2CCA1 /* active@2x.png in Resources */,
 				DBCA973D1883347400C2CCA1 /* like-white@2x.png in Resources */,
+				DB5FC056189BCD47008E4C9F /* KYICircleMenuButton01@2x.png in Resources */,
 				DBCA974E1883347400C2CCA1 /* News@2x.png in Resources */,
+				DB5FC063189BCD47008E4C9F /* KYICircleMenuCenterButtonBackground.png in Resources */,
 				DBCA976B1883347400C2CCA1 /* reply-cell-white.png in Resources */,
 				DBCA97701883347400C2CCA1 /* Reply@2x.png in Resources */,
+				DB204015189E7EC50007BFA6 /* SVWebViewController.bundle in Resources */,
+				DB5FC064189BCD47008E4C9F /* KYICircleMenuCenterButtonBackground@2x.png in Resources */,
 				DBCA97431883347400C2CCA1 /* menu-button.png in Resources */,
 				DBCA960E1882EEF300C2CCA1 /* Default@2x.png in Resources */,
 				DBCA97521883347400C2CCA1 /* noavatar@2x.png in Resources */,
 				DBCA97591883347400C2CCA1 /* Praise-Solid.png in Resources */,
+				DB5FC05A189BCD47008E4C9F /* KYICircleMenuButton03@2x.png in Resources */,
 				DBCA973F1883347400C2CCA1 /* like@2x.png in Resources */,
 				DBCA95D61882EDCB00C2CCA1 /* social-icon.png in Resources */,
 				D2652CDD1887F7CE00FF020D /* fot-Translucent.png in Resources */,
@@ -1443,6 +1635,7 @@
 				DBCA95D31882EDCB00C2CCA1 /* segmented-separator@2x.png in Resources */,
 				DBCA96F81883347400C2CCA1 /* Click-effect.png in Resources */,
 				DBCA96251882EEFE00C2CCA1 /* iTunesArtwork.png in Resources */,
+				DB5FC05C189BCD47008E4C9F /* KYICircleMenuButton04@2x.png in Resources */,
 				DBCA96F41883347400C2CCA1 /* 38-27-quxiao@2x.png in Resources */,
 				DBCA971A1883347400C2CCA1 /* fotWeb@2x.png in Resources */,
 				DBCA97191883347400C2CCA1 /* fotWeb.png in Resources */,
@@ -1451,6 +1644,7 @@
 				DBCA97301883347400C2CCA1 /* jia-guanzhu-white.png in Resources */,
 				DBCA96F71883347400C2CCA1 /* bg_furley.png in Resources */,
 				D2652CD71887F7CE00FF020D /* fot-icon-three.png in Resources */,
+				DBE3460518C0F23300FAC3FB /* timelineBg@2x.png in Resources */,
 				DBCA97151883347400C2CCA1 /* Find-a-friend@2x.png in Resources */,
 				DBCA977E1883347400C2CCA1 /* Share@2x.png in Resources */,
 				DBCA97421883347400C2CCA1 /* logoshare.jpg in Resources */,
@@ -1466,6 +1660,7 @@
 				DBCA976C1883347400C2CCA1 /* reply-cell-white@2x.png in Resources */,
 				DBCA97411883347400C2CCA1 /* login@2x.png in Resources */,
 				D2652CD61887F7CE00FF020D /* fot-icon-one@2x.png in Resources */,
+				DB106D6518B0AD1100F5CC43 /* MJRefresh.bundle in Resources */,
 				DBCA96F31883347400C2CCA1 /* 38-27-quxiao.png in Resources */,
 				DBCA95D71882EDCB00C2CCA1 /* social-icon@2x.png in Resources */,
 				DBCA97051883347400C2CCA1 /* Comment@2x.png in Resources */,
@@ -1496,6 +1691,7 @@
 				DBCA95E51882EDCB00C2CCA1 /* arrow_up.png in Resources */,
 				DBCA975A1883347400C2CCA1 /* Praise-Solid@2x.png in Resources */,
 				DBCA975B1883347400C2CCA1 /* Praise.png in Resources */,
+				DB5FC058189BCD47008E4C9F /* KYICircleMenuButton02@2x.png in Resources */,
 				DBCA97631883347400C2CCA1 /* rating-4.png in Resources */,
 				DBCA972B1883347400C2CCA1 /* Indentation@2x.png in Resources */,
 				DBCA95E81882EDCB00C2CCA1 /* dim@2x.png in Resources */,
@@ -1509,6 +1705,7 @@
 				DBCA97991883347400C2CCA1 /* ZGAppGame3.png in Resources */,
 				DBCA978A1883347400C2CCA1 /* talkBg@2x.png in Resources */,
 				DBCA961B1882EEFE00C2CCA1 /* Icon-72.png in Resources */,
+				DB5FC05D189BCD47008E4C9F /* KYICircleMenuButton05.png in Resources */,
 				DBCA96FD1883347400C2CCA1 /* Collection-Solid@2x.png in Resources */,
 				DBCA973E1883347400C2CCA1 /* like.png in Resources */,
 				DBCA972C1883347400C2CCA1 /* inner-shadow.png in Resources */,
@@ -1518,6 +1715,7 @@
 				DBCA96231882EEFE00C2CCA1 /* Icon80.png in Resources */,
 				DBCA979C1883347400C2CCA1 /* ZGAppGame4@2x.png in Resources */,
 				DBCA972D1883347400C2CCA1 /* introduction-1.png in Resources */,
+				DB5FC060189BCD47008E4C9F /* KYICircleMenuButton06@2x.png in Resources */,
 				DBCA97031883347400C2CCA1 /* Comment-thread@2x.png in Resources */,
 				DBCA961C1882EEFE00C2CCA1 /* Icon-72@2x.png in Resources */,
 				DBCA97211883347400C2CCA1 /* guanzhu-red.png in Resources */,
@@ -1574,28 +1772,37 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB106D6818B0AD1100F5CC43 /* MJRefreshFooterView.m in Sources */,
 				DBCA95D11882EDCB00C2CCA1 /* AKSegmentedControl.m in Sources */,
+				DB106D7318B5331000F5CC43 /* MHTextField.m in Sources */,
 				D297C47E1883F5010047AD45 /* BarBackgroundLayer.m in Sources */,
 				DBCA957F1882E85100C2CCA1 /* SlideNavigationController.m in Sources */,
 				DBCA96301882EF3200C2CCA1 /* Globle.m in Sources */,
 				DBCA95DA1882EDCB00C2CCA1 /* AlerViewManager.m in Sources */,
 				D297C47A1883F5010047AD45 /* JMSelectionView.m in Sources */,
+				DB2040A4189FEE450007BFA6 /* ELHeaderView.m in Sources */,
+				DB106D6718B0AD1100F5CC43 /* MJRefreshConst.m in Sources */,
 				D297C47B1883F5010047AD45 /* JMTabContainer.m in Sources */,
 				DBCA95EF1882EDCC00C2CCA1 /* ScrollPageView.m in Sources */,
 				D297C4801883F5010047AD45 /* CustomNoiseBackgroundView.m in Sources */,
 				D2652CC61887E9AE00FF020D /* HomeTabViewController.m in Sources */,
+				DB106D7218B5331000F5CC43 /* CustomTextField.m in Sources */,
 				DBCA95851882E93900C2CCA1 /* HomeViewCell.m in Sources */,
 				DBCA955D188190B700C2CCA1 /* heheAppDelegate.m in Sources */,
 				DBCA95E91882EDCB00C2CCA1 /* PullToRefreshTableView.m in Sources */,
+				DB106D6918B0AD1100F5CC43 /* MJRefreshHeaderView.m in Sources */,
+				DB0F629D18BA7E8700424BCD /* ProfileViewController.m in Sources */,
 				DBCA95F01882EDCC00C2CCA1 /* TableHeaderView.m in Sources */,
 				DBCA962F1882EF3200C2CCA1 /* AppDataSouce.m in Sources */,
 				D297C4771883F5010047AD45 /* UIView+InnerShadow.m in Sources */,
 				D297C4821883F5010047AD45 /* CustomTabItem.m in Sources */,
 				D297C47C1883F5010047AD45 /* JMTabItem.m in Sources */,
 				DBCA95F31882EDCC00C2CCA1 /* YIPopupTextView.m in Sources */,
+				DB106D6618B0AD1100F5CC43 /* MJRefreshBaseView.m in Sources */,
 				D297C4791883F5010047AD45 /* UIView+Size.m in Sources */,
 				DB05F51A188DB399003F9DA9 /* leftMenuCell.m in Sources */,
 				DBCA95EA1882EDCB00C2CCA1 /* ScrollPageControl.m in Sources */,
+				DB0F62A018BBC64600424BCD /* SignupViewController.m in Sources */,
 				DBCA96351882F28F00C2CCA1 /* TFIndicatorView.m in Sources */,
 				D297C4811883F5010047AD45 /* CustomSelectionView.m in Sources */,
 				D297C4781883F5010047AD45 /* UIView+Positioning.m in Sources */,
@@ -1604,16 +1811,22 @@
 				DBCA95FA1882EE2400C2CCA1 /* ArticleItem.m in Sources */,
 				DBCA95F41882EDCC00C2CCA1 /* YISSTextView.m in Sources */,
 				D297C47D1883F5010047AD45 /* JMTabView.m in Sources */,
+				DB204014189E7EC50007BFA6 /* SVModalWebViewController.m in Sources */,
 				DB0E196D189947AE00F597FE /* rightMenuViewController.m in Sources */,
 				DBCA95F51882EDCC00C2CCA1 /* UITableView+ZGParallelView.m in Sources */,
 				DBCA95E01882EDCB00C2CCA1 /* MBSwitch.m in Sources */,
+				DB204016189E7EC50007BFA6 /* SVWebViewController.m in Sources */,
+				DB2040A5189FEE450007BFA6 /* ELViewController.m in Sources */,
 				DBCA95DF1882EDCB00C2CCA1 /* JYTextField.m in Sources */,
 				D297C47F1883F5010047AD45 /* CustomBackgroundLayer.m in Sources */,
 				DBCA95861882E93900C2CCA1 /* HomeViewController.m in Sources */,
 				DBCA95FB1882EE2400C2CCA1 /* ArticleItemCell.m in Sources */,
 				DBCA96311882EF3200C2CCA1 /* UIColor+iOS7Colors.m in Sources */,
+				DB204019189E7F7D0007BFA6 /* GHRootViewController.m in Sources */,
 				DBCA9559188190B600C2CCA1 /* main.m in Sources */,
+				DB106D6C18B509D200F5CC43 /* SigninViewController.m in Sources */,
 				DBCA96411883294500C2CCA1 /* MDSlideNavigationViewController.m in Sources */,
+				DBD0548318BF33ED00C62811 /* TimelineViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1736,6 +1949,17 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/solidji/code/hehe/otherLib/ShareSDK_v2.5.0/Connection,
+					/Users/solidji/code/hehe/otherLib/ShareSDK_v2.5.0/Core,
+					/Users/solidji/code/hehe/otherLib/ShareSDK_v2.5.0/Extend/GooglePlusSDK,
+					/Users/solidji/code/hehe/otherLib/ShareSDK_v2.5.0/Extend/Pinterest.embeddedframework,
+					/Users/solidji/code/hehe/otherLib/ShareSDK_v2.5.0/Extend/RenRenSDK,
+					/Users/solidji/code/hehe/otherLib/ShareSDK_v2.5.0/Extend,
+					/Users/solidji/code/hehe/otherLib/ShareSDK_v2.5.0,
+					/Users/solidji/code/hehe/otherLib/ShareSDK_v2.5.0/UI,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "hehe/hehe-Prefix.pch";
 				INFOPLIST_FILE = "hehe/hehe-Info.plist";
@@ -1743,6 +1967,10 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/solidji/code/hehe/otherLib/GoogleAnalytics,
+					/Users/solidji/code/hehe/otherLib/ShareSDK_v2.5.0/Extend/libWeiboSDK,
+					/Users/solidji/code/hehe/otherLib/ShareSDK_v2.5.0/Extend/SDKExport,
+					/Users/solidji/code/hehe/otherLib/ShareSDK_v2.5.0/Extend/TencentWeiboSSO,
+					/Users/solidji/code/hehe/otherLib/JPush,
 				);
 				PRODUCT_NAME = "${TARGET_NAME}";
 				PROVISIONING_PROFILE = "";
@@ -1759,6 +1987,17 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/solidji/code/hehe/otherLib/ShareSDK_v2.5.0/Connection,
+					/Users/solidji/code/hehe/otherLib/ShareSDK_v2.5.0/Core,
+					/Users/solidji/code/hehe/otherLib/ShareSDK_v2.5.0/Extend/GooglePlusSDK,
+					/Users/solidji/code/hehe/otherLib/ShareSDK_v2.5.0/Extend/Pinterest.embeddedframework,
+					/Users/solidji/code/hehe/otherLib/ShareSDK_v2.5.0/Extend/RenRenSDK,
+					/Users/solidji/code/hehe/otherLib/ShareSDK_v2.5.0/Extend,
+					/Users/solidji/code/hehe/otherLib/ShareSDK_v2.5.0,
+					/Users/solidji/code/hehe/otherLib/ShareSDK_v2.5.0/UI,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "hehe/hehe-Prefix.pch";
 				INFOPLIST_FILE = "hehe/hehe-Info.plist";
@@ -1766,6 +2005,10 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/solidji/code/hehe/otherLib/GoogleAnalytics,
+					/Users/solidji/code/hehe/otherLib/ShareSDK_v2.5.0/Extend/libWeiboSDK,
+					/Users/solidji/code/hehe/otherLib/ShareSDK_v2.5.0/Extend/SDKExport,
+					/Users/solidji/code/hehe/otherLib/ShareSDK_v2.5.0/Extend/TencentWeiboSSO,
+					/Users/solidji/code/hehe/otherLib/JPush,
 				);
 				PRODUCT_NAME = "${TARGET_NAME}";
 				PROVISIONING_PROFILE = "";

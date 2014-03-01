@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "GAI.h"
+#import "SliderViewController.h"
+#import "LRNavigationController.h"
 
 @interface heheAppDelegate : UIResponder <UIApplicationDelegate>
 

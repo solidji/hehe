@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "HomeViewController.h"
 #import "JMTabView.h"
-#import "SlideNavigationController.h"
+//#import "SlideNavigationController.h"//SlideNavigationControllerDelegate
 
-@interface HomeTabViewController : UIViewController <JMTabViewDelegate,SlideNavigationControllerDelegate>
+@interface HomeTabViewController : UIViewController <JMTabViewDelegate>
 {
     HomeViewController *hotViewController;
     HomeViewController *newsViewController,*dataViewController;
@@ -20,6 +20,7 @@
 
 @property (nonatomic, strong) HomeViewController *hotViewController,*newsViewController,*dataViewController;
 @property (nonatomic, strong) HomeViewController *bbsViewController,*officialWebView;
+
 
 - (id)initWithTitle:(NSString *)title;
 @end

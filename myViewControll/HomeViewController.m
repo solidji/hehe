@@ -5,6 +5,11 @@
 //  Created by 计 炜 on 13-6-8.
 //  Copyright (c) 2013年 计 炜. All rights reserved.
 //
+#if __IPHONE_7_0 && __IPHONE_OS_VERSION_MAX_ALLOWED >=  __IPHONE_7_0
+#define NJK_IS_RUNNING_IOS7 ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
+#else
+#define NJK_IS_RUNNING_IOS7 NO
+#endif
 
 #import "HomeViewController.h"
 //#import "UIImageView+AFNetworking.h"
@@ -15,29 +20,42 @@
 
 #import "ArticleItem.h"
 #import "HomeViewCell.h"
-//#import "SVWebViewController.h"
+#import "SVWebViewController.h"
 //#import "DetailViewController.h"
-#import "Globle.h"
 //#import "SearchViewController.h"
 //#import "FTAnimation.h"
 #import "UIColor+iOS7Colors.h"
+#import "Globle.h"
 
 #import <AVOSCloud/AVOSCloud.h>
 #import <AVOSCloudSNS.h>
 #import <AVOSCloudSNS/AVUser+SNS.h>
 
+#import "SliderViewController.h"
+#import "LRNavigationController.h"
+
+#import "ELViewController.h"
+//#import "UIViewController+NJKFullScreenSupport.h"
+
 @interface HomeViewController ()
+@property (nonatomic, strong) UIView *navBar;
+@property (nonatomic, strong) MJRefreshHeaderView *header;
+@property (nonatomic, strong) MJRefreshFooterView *footer;
 - (void)revealSidebar;
 - (void)getComments;
+- (void)getData:(MJRefreshBaseView *)refreshView;
 - (void)goPopClicked:(UIBarButtonItem *)sender;
 - (void)gotoSearch;//搜索文章
 @end
 
 @implementation HomeViewController
 
-@synthesize comments,pullToRefreshTableView,webURL;
+@synthesize comments,pullToRefreshTableView,webURL,scrollProxy,navBar,header,footer;
 
 #pragma mark - View lifecycle
+- (id)init {
+    return [self initWithTitle:@"123" withUrl:@"http://www.appgame.com/"];
+}
 
 - (id)initWithTitle:(NSString *)title  withUrl:(NSString *)url{
     if (self = [super initWithNibName:nil bundle:nil]) {
@@ -62,7 +80,7 @@
         
         UIBarButtonItem *temporaryLeftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
         temporaryLeftBarButtonItem.style = UIBarButtonItemStylePlain;
-        //self.navigationItem.leftBarButtonItem = temporaryLeftBarButtonItem;
+        self.navigationItem.leftBarButtonItem = temporaryLeftBarButtonItem;
         
         UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
         //rightButton.frame = CGRectMake(0, 0, 26, 26);
@@ -82,7 +100,7 @@
         
         UIBarButtonItem *temporaryRightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
         temporaryRightBarButtonItem.style = UIBarButtonItemStylePlain;
-        //self.navigationItem.rightBarButtonItem = temporaryRightBarButtonItem;
+        self.navigationItem.rightBarButtonItem = temporaryRightBarButtonItem;
         
         alerViewManager = [[AlerViewManager alloc] init];
         ifNeedFristLoading = YES;
@@ -156,6 +174,18 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     self.view.frame = CGRectMake(0, 0, [Globle shareInstance].globleWidth, [Globle shareInstance].globleAllHeight);
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7) {
+        self.view.bounds = CGRectMake(0, -20, self.view.frame.size.width, self.view.frame.size.height);
+    }
+    //添加导航条
+//    UIImageView *imgV=[[UIImageView alloc] initWithFrame:self.view.bounds];
+//    [imgV setImage:[UIImage imageNamed:@"top.png"]];
+//    [self.view addSubview:imgV];
+    
+    navBar=[[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)];//+[UIApplication sharedApplication].statusBarFrame.size.height
+    navBar.backgroundColor=[UIColor iOS7redColor];
+    navBar.alpha=0.6;
+    
     //self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Background-2.png"]];
 //    UIImage *image = [UIImage imageNamed:@"Background.png"];
 //    UIImageView *bg = [[UIImageView alloc] initWithImage:image];
@@ -166,19 +196,95 @@
     start = 0;
     receiveMember = 0;
     updating = NO;//正在更新中,不要重复了
-    pullToRefreshTableView = [[PullToRefreshTableView alloc] initWithFrame: CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height) withType: withStateViews];//[[UIScreen mainScreen] bounds].size.height-20
+    pullToRefreshTableView = [[UITableView alloc] initWithFrame: CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height-20)];// withType: withStateViews];//[[UIScreen mainScreen] bounds].size.height-20
+    //self.pullToRefreshTableView.contentInset = UIEdgeInsetsMake(44, 0 ,0, 0);
     
-    [self.pullToRefreshTableView setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
+    //[self.pullToRefreshTableView setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
     pullToRefreshTableView.delegate = self;
     pullToRefreshTableView.dataSource = self;
     pullToRefreshTableView.allowsSelection = YES;
-    pullToRefreshTableView.backgroundColor = [UIColor clearColor];
     pullToRefreshTableView.backgroundColor = [UIColor whiteColor];
     pullToRefreshTableView.separatorStyle = UITableViewCellSeparatorStyleNone;//选中时cell样式
     pullToRefreshTableView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     [pullToRefreshTableView setHidden:NO];
     //pullToRefreshTableView.alpha = 0.7f;
     [self.view addSubview:pullToRefreshTableView];
+    
+    UIView *holdHeadView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)];//+[UIApplication sharedApplication].statusBarFrame.size.height
+    holdHeadView.backgroundColor=[UIColor clearColor];
+    self.pullToRefreshTableView.tableHeaderView = holdHeadView;
+    
+    __unsafe_unretained HomeViewController *vc = self;
+    //添加下拉刷新
+    header = [MJRefreshHeaderView header];
+    header.scrollView = self.pullToRefreshTableView;
+    
+    header.beginRefreshingBlock = ^(MJRefreshBaseView *refreshView) {
+        // 进入刷新状态就会回调这个Block
+        
+        // 增加5条假数据
+//        for (int i = 0; i<5; i++) {
+//            int random = arc4random_uniform(1000000);
+//            [vc->_fakeData insertObject:[NSString stringWithFormat:@"随机数据---%d", random] atIndex:0];
+//        }
+        
+        // 模拟延迟加载数据，因此2秒后才调用）
+        // 这里的refreshView其实就是header
+        //[vc performSelector:@selector(updateTableView) withObject:refreshView afterDelay:2.0];
+        [vc.comments removeAllObjects];
+        vc->start = 0;
+        [vc.pullToRefreshTableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+        [vc performSelectorOnMainThread:@selector(getData:) withObject:refreshView waitUntilDone:NO];
+        
+        NSLog(@"%@----开始进入刷新状态", refreshView.class);
+    };
+    header.endStateChangeBlock = ^(MJRefreshBaseView *refreshView) {
+        // 刷新完毕就会回调这个Block
+        NSLog(@"%@----刷新完毕", refreshView.class);
+    };
+    header.refreshStateChangeBlock = ^(MJRefreshBaseView *refreshView, MJRefreshState state) {
+        // 控件的刷新状态切换了就会调用这个block
+        switch (state) {
+            case MJRefreshStateNormal:
+                NSLog(@"%@----切换到：普通状态", refreshView.class);
+                break;
+                
+            case MJRefreshStatePulling:
+                NSLog(@"%@----切换到：松开即可刷新的状态", refreshView.class);
+                break;
+                
+            case MJRefreshStateRefreshing:
+                NSLog(@"%@----切换到：正在刷新状态", refreshView.class);
+                break;
+            default:
+                break;
+        }
+    };
+    [header beginRefreshing];
+    
+    //添加上拉加载更多
+    footer = [MJRefreshFooterView footer];
+    footer.scrollView = self.pullToRefreshTableView;
+    footer.beginRefreshingBlock = ^(MJRefreshBaseView *refreshView) {
+        // 增加5条假数据
+//        for (int i = 0; i<5; i++) {
+//            int random = arc4random_uniform(1000000);
+//            [vc->_fakeData addObject:[NSString stringWithFormat:@"随机数据---%d", random]];
+//        }
+        
+        // 模拟延迟加载数据，因此2秒后才调用）
+        // 这里的refreshView其实就是footer
+        //[vc performSelector:@selector(updateTableView) withObject:refreshView afterDelay:2.0];
+        
+        vc->start = [vc.comments count]/20 + 1;
+        [vc performSelectorOnMainThread:@selector(getData:) withObject:refreshView waitUntilDone:NO];
+        
+        NSLog(@"%@----开始进入刷新状态", refreshView.class);
+    };//[refreshView endRefreshingWithoutIdle];//没有数据了
+    
+    scrollProxy = [[NJKScrollFullScreen alloc] initWithForwardTarget:self]; // UIScrollViewDelegate and UITableViewDelegate methods proxy to ViewController
+    self.pullToRefreshTableView.delegate = (id)scrollProxy; // cast for surpress incompatible warnings
+    scrollProxy.delegate = self;
     
     etActivity = [[TFIndicatorView alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2-30, self.view.bounds.size.height/2-30, 60, 60)];
     
@@ -198,38 +304,40 @@
 //                       //your code here
 //                       [self performSelectorInBackground:@selector(getComments) withObject:nil];
 //                   });
-    [self getComments];
+    [self.view addSubview:navBar];
+    //[self getComments];
 
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     
     //self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
-    [self.navigationController.navigationBar setTranslucent:NO];
-    [self.navigationController setToolbarHidden:YES animated:animated];
-    
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] > 4.9) {
-        if([[[UIDevice currentDevice] systemVersion] floatValue]>=7.0)
-        {   //ios7
-            [self.navigationController.navigationBar setTranslucent:YES];
-            pullToRefreshTableView.frame = CGRectMake(0, 64.0, self.view.bounds.size.width, self.view.bounds.size.height-64.0);
-        }else
-        {
-            //IOS5
-            [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top.png"] forBarMetrics:UIBarMetricsDefault];
-        }
-        NSDictionary *currentStyle = [NSDictionary dictionaryWithObjectsAndKeys:
-                                      [UIColor blackColor],
-                                      UITextAttributeTextColor,
-                                      [UIColor clearColor],
-                                      UITextAttributeTextShadowColor,
-                                      [NSValue valueWithUIOffset:UIOffsetMake(0, -1)],
-                                      UITextAttributeTextShadowOffset,
-                                      [UIFont fontWithName:@"Helvetica-Bold" size:20.0],
-                                      UITextAttributeFont,
-                                      nil];
-        self.navigationController.navigationBar.titleTextAttributes = currentStyle;
-    }
+    [self.navigationController.navigationBar setHidden:YES];
+    //[self.navigationController.navigationBar setTranslucent:NO];
+//    [self.navigationController setToolbarHidden:YES animated:animated];
+//    
+//    if ([[[UIDevice currentDevice] systemVersion] floatValue] > 4.9) {
+//        if([[[UIDevice currentDevice] systemVersion] floatValue]>=7.0)
+//        {   //ios7
+//            [self.navigationController.navigationBar setTranslucent:YES];
+//            pullToRefreshTableView.frame = CGRectMake(0, 64.0, self.view.bounds.size.width, self.view.bounds.size.height-64.0);
+//        }else
+//        {
+//            //IOS5
+//            [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top.png"] forBarMetrics:UIBarMetricsDefault];
+//        }
+//        NSDictionary *currentStyle = [NSDictionary dictionaryWithObjectsAndKeys:
+//                                      [UIColor blackColor],
+//                                      UITextAttributeTextColor,
+//                                      [UIColor clearColor],
+//                                      UITextAttributeTextShadowColor,
+//                                      [NSValue valueWithUIOffset:UIOffsetMake(0, -1)],
+//                                      UITextAttributeTextShadowOffset,
+//                                      [UIFont fontWithName:@"Helvetica-Bold" size:20.0],
+//                                      UITextAttributeFont,
+//                                      nil];
+//        self.navigationController.navigationBar.titleTextAttributes = currentStyle;
+//    }
     
     if([self.webURL isEqualToString:@"http://www.appgame.com/archives/category/game-reviews/"])
     {
@@ -249,6 +357,11 @@
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     //[etActivity stopAnimating];
     //[etActivity removeFromSuperview];
+    
+    //为了保证内部不泄露，在dealloc中释放占用的内存
+    //NSLog(@"MJTableViewController--dealloc---");
+    [header free];
+    [footer free];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -277,15 +390,15 @@
 	_revealBlock();
 }
 
-- (BOOL)slideNavigationControllerShouldDisplayLeftMenu
-{
-    return YES;
-}
-
-- (BOOL)slideNavigationControllerShouldDisplayRightMenu
-{
-    return YES;
-}
+//- (BOOL)slideNavigationControllerShouldDisplayLeftMenu
+//{
+//    return YES;
+//}
+//
+//- (BOOL)slideNavigationControllerShouldDisplayRightMenu
+//{
+//    return YES;
+//}
 
 - (void)didSelectItemAtIndex:(NSUInteger)index
 {
@@ -363,26 +476,97 @@
     [[self navigationController] popViewControllerAnimated:YES];
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+//{
+//    [pullToRefreshTableView tableViewDidDragging];
+//}
+//
+//- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+//{
+//    NSInteger returnKey = [pullToRefreshTableView tableViewDidEndDragging];
+//    
+//    //  returnKey用来判断执行的拖动是下拉还是上拖，如果数据正在加载，则返回DO_NOTHING
+//    if (returnKey != k_RETURN_DO_NOTHING)
+//    {
+//        NSString * key = [NSString stringWithFormat:@"%d", returnKey];
+//        [NSThread detachNewThreadSelector:@selector(updateThread:) toTarget:self withObject:key];
+//    }
+//    
+//    if (!decelerate)
+//    {
+//        //[self loadImagesForOnscreenRows];
+//    }
+//}
+
+#pragma mark -
+#pragma mark - NJKScrollFullScreenDelegate
+- (void)setNavigationBarOriginY:(CGFloat)y animated:(BOOL)animated
 {
-    [pullToRefreshTableView tableViewDidDragging];
+    CGFloat statusBarHeight = 0;//[UIApplication sharedApplication].statusBarFrame.size.height;//navBar.frame.size.height;
+    CGRect frame = navBar.frame;
+    CGFloat navigationBarHeight = frame.size.height;
+    
+    CGFloat topLimit = NJK_IS_RUNNING_IOS7 ? -navigationBarHeight + statusBarHeight : -navigationBarHeight;
+    CGFloat bottomLimit = statusBarHeight;
+    
+    frame.origin.y = fmin(fmax(y, topLimit), bottomLimit);//限制Y值在顶部到导航条高度之间
+    //CGFloat alpha = 1 - (statusBarHeight - frame.origin.y) / statusBarHeight;
+    //UIColor *titleTextColor = self.navigationController.navigationBar.titleTextAttributes[NSForegroundColorAttributeName] ?: [UIColor blackColor];
+    //titleTextColor = [titleTextColor colorWithAlphaComponent:alpha]; // fade title
+    [UIView animateWithDuration:animated ? 0.1 : 0 animations:^{
+        navBar.frame = frame;
+        //[self.navigationController.navigationBar setTitleTextAttributes:@{ NSForegroundColorAttributeName : titleTextColor }];
+//        if (NJK_IS_RUNNING_IOS7) {
+//            // fade bar buttons
+//            UIColor *tintColor = self.navigationController.navigationBar.tintColor;
+//            if (tintColor) {
+//                CGFloat *components = (CGFloat *)CGColorGetComponents(tintColor.CGColor);
+//                self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:components[0] green:components[1] blue:components[2] alpha:alpha];
+//            }
+//        }
+        
+    }];
+    
+//    frame.origin.y = fmin(fmax(y, navigationBarHeight), statusBarHeight); // limit over moving
+//    
+//    [UIView animateWithDuration:animated ? 0.1 : 0 animations:^{
+//        navBar.frame = frame;
+//    }];
 }
 
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+- (void)scrollFullScreen:(NJKScrollFullScreen *)proxy scrollViewDidScrollUp:(CGFloat)deltaY
 {
-    NSInteger returnKey = [pullToRefreshTableView tableViewDidEndDragging];
     
-    //  returnKey用来判断执行的拖动是下拉还是上拖，如果数据正在加载，则返回DO_NOTHING
-    if (returnKey != k_RETURN_DO_NOTHING)
-    {
-        NSString * key = [NSString stringWithFormat:@"%d", returnKey];
-        [NSThread detachNewThreadSelector:@selector(updateThread:) toTarget:self withObject:key];
-    }
+    //[self moveNavigtionBar:deltaY animated:YES];
+    CGRect frame = navBar.frame;
+    CGFloat nextY = frame.origin.y + deltaY;
+    [self setNavigationBarOriginY:nextY animated:YES];
+}
+
+- (void)scrollFullScreen:(NJKScrollFullScreen *)proxy scrollViewDidScrollDown:(CGFloat)deltaY
+{
+    CGRect frame = navBar.frame;
+    CGFloat nextY = frame.origin.y + deltaY;
+    [self setNavigationBarOriginY:nextY animated:YES];
+}
+
+- (void)scrollFullScreenScrollViewDidEndDraggingScrollUp:(NJKScrollFullScreen *)proxy
+{
+    //[self hideNavigationBar:YES];
+    //[self setNavigationBarOriginY:0 animated:YES];
+    CGSize statuBarFrameSize = CGSizeMake(0, 0);//[UIApplication sharedApplication].statusBarFrame.size;
+    CGFloat statusBarHeight = UIInterfaceOrientationIsPortrait(self.interfaceOrientation) ? statuBarFrameSize.height : statuBarFrameSize.width;
+    CGFloat navigationBarHeight = navBar.frame.size.height;
+    CGFloat top = NJK_IS_RUNNING_IOS7 ? -navigationBarHeight + statusBarHeight : -navigationBarHeight;
     
-    if (!decelerate)
-    {
-        //[self loadImagesForOnscreenRows];
-    }
+    [self setNavigationBarOriginY:top animated:YES];
+}
+
+- (void)scrollFullScreenScrollViewDidEndDraggingScrollDown:(NJKScrollFullScreen *)proxy
+{
+    //[self showNavigationBar:YES];
+    CGFloat statusBarHeight = 0;//[UIApplication sharedApplication].statusBarFrame.size.height;
+    [self setNavigationBarOriginY:statusBarHeight animated:YES];
 }
 
 #pragma mark -
@@ -390,15 +574,16 @@
 
 //某一行被选中,由ViewController来实现push详细页面
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-//    if ([self.comments count] > indexPath.row) {
-//        ArticleItem *aArticle = [self.comments objectAtIndex:indexPath.row];
-//        SVWebViewController *viewController = [[SVWebViewController alloc] initWithHTMLString:aArticle URL:aArticle.articleURL];
-//        
-//        //NSLog(@"didSelectArticle:%@",aArticle.content);
-//        //[viewController.view popIn:0.2 delegate:nil];
-//        [self.navigationController pushViewController:viewController animated:YES];
-//    }
+    if ([self.comments count] > indexPath.row) {
+        ArticleItem *aArticle = [self.comments objectAtIndex:indexPath.row];
+        SVWebViewController *viewController = [[SVWebViewController alloc] initWithHTMLString:aArticle URL:aArticle.articleURL];
+        ELViewController *viewController1 = [[ELViewController alloc] init];
+        //NSLog(@"didSelectArticle:%@",aArticle.content);
+        //[viewController.view popIn:0.2 delegate:nil];
+        //[self.navigationController pushViewController:viewController animated:YES];
+        
+        [(LRNavigationController*)[SliderViewController sharedSliderController].navigationController pushViewControllerWithLRAnimated:viewController];
+    }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
         
 }
@@ -406,7 +591,10 @@
 #pragma mark - Table view data source
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+
+//    if (indexPath.row == 0) {
+//        return 44;
+//    }
     return 100.0f;
     
 //    ArticleItem *comment = (ArticleItem *)[self.comments objectAtIndex:indexPath.row];
@@ -417,12 +605,12 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if ([comments count] == 0) {
-        //  本方法是为了在数据为空时，让“下拉刷新”视图可直接显示，比较直观
-        PullToRefreshTableView *tab = (PullToRefreshTableView*)tableView;
-        [tab.footerView changeState:k_PULL_STATE_LOAD];
-        //tableView.contentInset = UIEdgeInsetsMake(k_STATE_VIEW_HEIGHT, 0, 0, 0);
-    }
+//    if ([comments count] == 0) {
+//        //  本方法是为了在数据为空时，让“下拉刷新”视图可直接显示，比较直观
+//        PullToRefreshTableView *tab = (PullToRefreshTableView*)tableView;
+//        [tab.footerView changeState:k_PULL_STATE_LOAD];
+//        //tableView.contentInset = UIEdgeInsetsMake(k_STATE_VIEW_HEIGHT, 0, 0, 0);
+//    }
     return [comments count];
 }
 
@@ -436,7 +624,10 @@
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
     // Leave cells empty if there's no data yet
     int nodeCount = [self.comments count];
-    
+//    if (indexPath.row == 0) {
+//        cell.hidden = YES;
+//        return cell;
+//    }
     if (nodeCount > 0)
 	{
         // Set up the cell...
@@ -539,12 +730,12 @@
     if (self.comments.count - indexPath.row < 3 && !updating) {
         updating = YES;
         NSLog(@"滚到最后了");
-        if (pullToRefreshTableView.footerView.currentState != k_PULL_STATE_END) {
-            NSInteger returnKey = k_PULL_STATE_LOAD;
-            [pullToRefreshTableView.footerView changeState:k_PULL_STATE_LOAD];
-            NSString * key = [NSString stringWithFormat:@"%d", returnKey];
-            [NSThread detachNewThreadSelector:@selector(updateThread:) toTarget:self withObject:key];
-        }
+//        if (pullToRefreshTableView.footerView.currentState != k_PULL_STATE_END) {
+//            NSInteger returnKey = k_PULL_STATE_LOAD;
+//            [pullToRefreshTableView.footerView changeState:k_PULL_STATE_LOAD];
+//            NSString * key = [NSString stringWithFormat:@"%d", returnKey];
+//            [NSThread detachNewThreadSelector:@selector(updateThread:) toTarget:self withObject:key];
+//        }
         //[self performSelectorOnMainThread:@selector(getArticles) withObject:nil waitUntilDone:NO];
         // update方法获取到结果后，设置updating为NO
     }
@@ -578,24 +769,34 @@
     }
 }
 
-- (void)updateTableView
+- (void)getComments
 {
-    if (receiveMember  >= 20)
-        //if (hasNext)
-    {
-        //  一定要调用本方法，否则下拉/上拖视图的状态不会还原，会一直转菊花
-        //如果数据还能继续加载，则传入NO
-        [pullToRefreshTableView reloadData:NO];
-    }
-    else
-    {
-        //  一定要调用本方法，否则下拉/上拖视图的状态不会还原，会一直转菊花
-        //如果已全部加载，则传入YES
-        [pullToRefreshTableView reloadData:YES];
-    }
+    // 刷新表格
+    [self.pullToRefreshTableView reloadData];
+    // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
+    //[refreshView endRefreshing];
 }
 
-- (void)getComments {
+- (void)updateTableView
+{
+    [pullToRefreshTableView reloadData];
+//    if (receiveMember  >= 20)
+//        //if (hasNext)
+//    {
+//        //  一定要调用本方法，否则下拉/上拖视图的状态不会还原，会一直转菊花
+//        //如果数据还能继续加载，则传入NO
+//        [pullToRefreshTableView reloadData:NO];
+//    }
+//    else
+//    {
+//        //  一定要调用本方法，否则下拉/上拖视图的状态不会还原，会一直转菊花
+//        //如果已全部加载，则传入YES
+//        [pullToRefreshTableView reloadData:YES];
+//    }
+}
+
+
+- (void)getData:(MJRefreshBaseView *)refreshView {
     
     //[alerViewManager showMessage:@"正在加载数据" inView:self.view];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
@@ -823,18 +1024,18 @@
                                    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
                                        if (!error) {
                                            // The find succeeded.
-                                           NSLog(@"Successfully retrieved %d scores.", objects.count);
-                                           if (objects.count < 1) {
-                                               AVObject *myPost = [AVObject objectWithClassName:@"Post"];
-                                               [myPost setObject:commentItem.title forKey:@"title"];
-                                               [myPost setObject:commentItem.content forKey:@"content"];
-                                               [myPost setObject:commentItem.articleIconURL.absoluteString forKey:@"icon"];
-                                               [myPost setObject:commentItem.articleURL.absoluteString forKey:@"url"];
-                                               [myPost setObject:commentItem.creator forKey:@"creator"];
-                                               [myPost setObject:commentItem.pubDate forKey:@"pubDate"];
-                                               [myPost setObject:commentItem.description forKey:@"description"];
-                                               [myPost save];
-                                           }
+//                                           NSLog(@"Successfully retrieved %d scores.", objects.count);
+//                                           if (objects.count < 1) {
+//                                               AVObject *myPost = [AVObject objectWithClassName:@"Post"];
+//                                               [myPost setObject:commentItem.title forKey:@"title"];
+//                                               [myPost setObject:commentItem.content forKey:@"content"];
+//                                               [myPost setObject:commentItem.articleIconURL.absoluteString forKey:@"icon"];
+//                                               [myPost setObject:commentItem.articleURL.absoluteString forKey:@"url"];
+//                                               [myPost setObject:commentItem.creator forKey:@"creator"];
+//                                               [myPost setObject:commentItem.pubDate forKey:@"pubDate"];
+//                                               [myPost setObject:commentItem.description forKey:@"description"];
+//                                               [myPost save];
+//                                           }
                                        } else {
                                            // Log details of the failure
                                            NSLog(@"Error: %@ %@", error, [error userInfo]);
@@ -849,7 +1050,11 @@
                            //到这里就是0条数据
                        }
                        //[alerViewManager dismissMessageView:self.view];
-                       [self performSelectorOnMainThread:@selector(updateTableView) withObject:nil waitUntilDone:NO];
+        //[self performSelectorOnMainThread:@selector(doneWithView:) withObject:header waitUntilDone:NO];
+        // 刷新表格
+        [self.pullToRefreshTableView reloadData];
+        // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
+        [refreshView endRefreshing];
                        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
                        updating = NO;
                        //[etActivity stopAnimating];
@@ -858,7 +1063,11 @@
         NSLog(@"Error: %@", error);
         // pass error to the block
         NSLog(@"获取文章json失败:%@",error);
-        [self performSelectorOnMainThread:@selector(updateTableView) withObject:nil waitUntilDone:NO];
+        //[self performSelectorOnMainThread:@selector(doneWithView:) withObject:header waitUntilDone:NO];
+        // 刷新表格
+        [self.pullToRefreshTableView reloadData];
+        // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
+        [refreshView endRefreshing];
         //[alerViewManager dismissMessageView:self.view];
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         //[etActivity stopAnimating];

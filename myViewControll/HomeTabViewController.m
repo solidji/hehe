@@ -14,6 +14,7 @@
 #import "CustomBackgroundLayer.h"
 #import "CustomNoiseBackgroundView.h"
 #import "UIView+Positioning.h"
+#import "UIColor+iOS7Colors.h"
 
 //@implementation UINavigationBar (CustomHeight)
 //- (CGSize)sizeThatFits:(CGSize)size {
@@ -57,6 +58,9 @@
 //    }
 //    return self;
 //}
+- (id) init {
+    return [self initWithTitle:@"TAB"];
+}
 
 - (id)initWithTitle:(NSString *)title
 {
@@ -84,9 +88,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor clearColor];
+    //self.view.backgroundColor = [UIColor clearColor];
     self.view.backgroundColor = [UIColor whiteColor];
-    self.view.frame = CGRectMake(0, 44, [Globle shareInstance].globleWidth, [Globle shareInstance].globleHeight-44);
+    self.view.frame = CGRectMake(0, 0, [Globle shareInstance].globleWidth, [Globle shareInstance].globleHeight);
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7) {
+        //self.view.bounds = CGRectMake(0, -20, self.view.frame.size.width, self.view.frame.size.height );
+    }
+    
 	// Do any additional setup after loading the view.
 //    filterView = [[DMFilterView alloc] initWithStrings:@[@"攻略", @"数据库", @"资讯", @"论坛"] containerView:self.view];
 //    [self.filterView attachToContainerView];
@@ -108,7 +116,7 @@
     //hotViewController = [[HomeViewController alloc] initWithTitle:@"攻略" withUrl:@"re-men-wen-zhang" withFrame:CGRectMake(0, 0, 320, [Globle shareInstance].globleHeight-44-44)];
     hotViewController = [[HomeViewController alloc] initWithTitle:@"资讯" withUrl:@"http://www.appgame.com/" withRevealBlock:revealBlock];
     [self addChildViewController:hotViewController];
-    [hotViewController.view setFrame:CGRectMake(0, 0, 320, [Globle shareInstance].globleHeight-44-44)];
+    [hotViewController.view setFrame:CGRectMake(0, 0, 320, self.view.bounds.size.height-44)];
     [self.view addSubview:hotViewController.view];
     [hotViewController.view setHidden:NO];
     
@@ -117,7 +125,7 @@
     //第二页,数据库
     dataViewController = [[HomeViewController alloc] initWithTitle:@"资讯" withUrl:@"http://www.appgame.com/" withRevealBlock:revealBlock];
     [self addChildViewController:dataViewController];
-    [dataViewController.view setFrame:CGRectMake(0, 0, 320, [Globle shareInstance].globleHeight-44-44)];
+    [dataViewController.view setFrame:CGRectMake(0, 0, 320, self.view.bounds.size.height-44)];
     [self.view addSubview:dataViewController.view];
     [self.dataViewController.view setHidden:YES];
     
@@ -126,14 +134,14 @@
     //第三页,资讯    
     newsViewController = [[HomeViewController alloc] initWithTitle:@"资讯" withUrl:@"http://www.appgame.com/" withRevealBlock:revealBlock];
     [self addChildViewController:newsViewController];
-    [newsViewController.view setFrame:CGRectMake(0, 0, 320, [Globle shareInstance].globleHeight-44-44)];
+    [newsViewController.view setFrame:CGRectMake(0, 0, 320, self.view.bounds.size.height-44)];
     [self.view addSubview:newsViewController.view];
     [newsViewController.view setHidden:YES];
     
     //第四页,资讯
     bbsViewController = [[HomeViewController alloc] initWithTitle:@"资讯" withUrl:@"http://www.appgame.com/" withRevealBlock:revealBlock];
     [self addChildViewController:bbsViewController];
-    [bbsViewController.view setFrame:CGRectMake(0, 0, 320, [Globle shareInstance].globleHeight-44-44)];
+    [bbsViewController.view setFrame:CGRectMake(0, 0, 320, self.view.bounds.size.height-44)];
     [self.view addSubview:bbsViewController.view];
     [bbsViewController.view setHidden:YES];
     
@@ -219,14 +227,43 @@
     
     //self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
     //[self.navigationController.navigationBar setTranslucent:NO];
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] > 4.9) {
-        //IOS5
-        [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top.png"] forBarMetrics:UIBarMetricsDefault];
-        //self.navigationController.navigationBar.backgroundColor = [UIColor clearColor];
-        //self.navigationController.navigationBar.tintColor = [UIColor clearColor];
-        self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor] ,UITextAttributeTextColor,[UIFont fontWithName:@"HelveticaNeue-Bold" size:20.0], UITextAttributeFont,nil];
-    }
+//    if ([[[UIDevice currentDevice] systemVersion] floatValue] > 4.9) {
+//        //IOS5
+//        [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top.png"] forBarMetrics:UIBarMetricsDefault];
+//        //self.navigationController.navigationBar.backgroundColor = [UIColor clearColor];
+//        //self.navigationController.navigationBar.tintColor = [UIColor clearColor];
+//        self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor] ,UITextAttributeTextColor,[UIFont fontWithName:@"HelveticaNeue-Bold" size:20.0], UITextAttributeFont,nil];
+//    }
+    [self.navigationController.navigationBar setHidden:YES];
+//    [self.navigationController.navigationBar setTranslucent:NO];
+//    [self.navigationController setToolbarHidden:YES animated:animated];
+//    
+//    if ([[[UIDevice currentDevice] systemVersion] floatValue] > 4.9) {
+//        if([[[UIDevice currentDevice] systemVersion] floatValue]>=7.0)
+//        {   //ios7
+//            [self.navigationController.navigationBar setTranslucent:YES];
+//            //[self.navigationController.navigationBar setHidden:NO];
+//            //[self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top.png"] forBarMetrics:UIBarMetricsDefault];
+//            //pullToRefreshTableView.frame = CGRectMake(0, 64.0, self.view.bounds.size.width, self.view.bounds.size.height-64.0);
+//        }else
+//        {
+//            //IOS5-6
+//            [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"top.png"] forBarMetrics:UIBarMetricsDefault];
+//        }
+//        NSDictionary *currentStyle = [NSDictionary dictionaryWithObjectsAndKeys:
+//                                      [UIColor blackColor],
+//                                      UITextAttributeTextColor,
+//                                      [UIColor clearColor],
+//                                      UITextAttributeTextShadowColor,
+//                                      [NSValue valueWithUIOffset:UIOffsetMake(0, -1)],
+//                                      UITextAttributeTextShadowOffset,
+//                                      [UIFont fontWithName:@"Helvetica-Bold" size:20.0],
+//                                      UITextAttributeFont,
+//                                      nil];
+//        self.navigationController.navigationBar.titleTextAttributes = currentStyle;
+//    }
 }
+
 
 - (BOOL) automaticallyForwardAppearanceAndRotationMethodsToChildViewControllers {
     return YES;
@@ -298,15 +335,15 @@
 //    
 //}
 
-- (BOOL)slideNavigationControllerShouldDisplayLeftMenu
-{
-    return YES;
-}
-
-- (BOOL)slideNavigationControllerShouldDisplayRightMenu
-{
-    return NO;
-}
+//- (BOOL)slideNavigationControllerShouldDisplayLeftMenu
+//{
+//    return YES;
+//}
+//
+//- (BOOL)slideNavigationControllerShouldDisplayRightMenu
+//{
+//    return NO;
+//}
 
 
 -(void)tabView:(JMTabView *)tabView didSelectTabAtIndex:(NSUInteger)itemIndex;

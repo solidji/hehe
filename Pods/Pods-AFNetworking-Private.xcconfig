@@ -1,0 +1,5 @@
+#include "Pods-AFNetworking.xcconfig"
+GCC_PREPROCESSOR_DEFINITIONS = COCOAPODS=1
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/BuildHeaders" "${PODS_ROOT}/BuildHeaders/AFNetworking" "${PODS_ROOT}/Headers" "${PODS_ROOT}/Headers/AFNetworking" "${PODS_ROOT}/Headers/AVOSCloud" "${PODS_ROOT}/Headers/AVOSCloudSNS" "${PODS_ROOT}/Headers/GoogleAnalytics-iOS-SDK" "${PODS_ROOT}/Headers/KYCircleMenu" "${PODS_ROOT}/Headers/LRNavigationController" "${PODS_ROOT}/Headers/NJKScrollFullScreen" "${PODS_ROOT}/Headers/OpenUDID" "${PODS_ROOT}/Headers/SDWebImage" "${PODS_ROOT}/Headers/SliderViewController" "${PODS_ROOT}/Headers/iVersion"
+OTHER_LDFLAGS = -ObjC ${PODS_AFNETWORKING_OTHER_LDFLAGS}
+PODS_ROOT = ${SRCROOT}

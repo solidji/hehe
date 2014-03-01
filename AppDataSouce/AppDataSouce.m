@@ -10,8 +10,8 @@
 
 @implementation AppDataSouce
 
-@synthesize username,password,remote_auth_s3,api_key;//登录相关信息
-
+@synthesize username, password,remote_auth_s3,api_key;//登录相关信息
+@synthesize name, about, numPosts, url, profileUrl, reputation, location, joinedAt, userID, authorAvatar,numFollowers,numFollowing,numLikesReceived, isFollowedBy, isFollowing, isOneself;
 //@synthesize menuController;
 //@synthesize userObject;
 //@synthesize credentialObject;

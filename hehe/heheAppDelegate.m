@@ -12,7 +12,10 @@
 #import <AVOSCloudSNS/AVUser+SNS.h>
 #import "SlideNavigationController.h"
 #import "MDSlideNavigationViewController.h"
+
 #import "Globle.h"
+#import "AppDataSouce.h"
+#import "GlobalConfigure.h"
 //#import "iVersion.h"//StoreKit framework.
 
 //jmtabview
@@ -26,6 +29,7 @@
 #import "HomeViewController.h"
 #import "HomeTabViewController.h"
 #import "leftMenuViewController.h"
+#import "rightMenuViewController.h"
 
 static NSString *const kTrackingId = @"UA-43724755-1";
 static NSString *const kAllowTracking = @"allowTracking";
@@ -34,13 +38,14 @@ static NSString *const kAllowTracking = @"allowTracking";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    CGRect screenRect = [[UIScreen mainScreen] bounds];//320,568
-    CGRect appBound = [[UIScreen mainScreen] applicationFrame];//320,548
+    CGRect screenRect = [[UIScreen mainScreen] bounds];//(320,568)
+    CGRect appBound = [[UIScreen mainScreen] applicationFrame];//(320,548)
     [Globle shareInstance].globleWidth = screenRect.size.width; //屏幕宽度
     [Globle shareInstance].globleHeight = appBound.size.height;  //屏幕高度（无顶栏）
     [Globle shareInstance].globleAllHeight = screenRect.size.height;  //屏幕高度（有顶栏）
     
-    //GA数据分析
+    
+//### GA数据分析
     NSDictionary *appDefaults = @{kAllowTracking: @(YES)};
     [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
     // User must be able to opt out of tracking
@@ -51,11 +56,13 @@ static NSString *const kAllowTracking = @"allowTracking";
     [GAI sharedInstance].dispatchInterval = 120;
     [GAI sharedInstance].trackUncaughtExceptions = YES;
     self.tracker = [[GAI sharedInstance] trackerWithName:@"appgame-sxw"
+          
                                               trackingId:kTrackingId];
-    //iVersion 更新检测
+//### iVersion 更新检测
     //[iVersion sharedInstance].appStoreID = 696542515;
     
-    //AVOS云服务
+    
+//### AVOS云服务
     [AVOSCloud setApplicationId:@"adpfxghpdyd7hridwm1ynr553ydsruo81lhyt8lazq7qvtiw"
                       clientKey:@"6avi9vr7mdgxo1vluezv5sk3ny6mnjgxcwuk3s8827sdu3ym"];
     
@@ -88,94 +95,71 @@ static NSString *const kAllowTracking = @"allowTracking";
     
     AVUser * currentUser = [AVUser currentUser];
     if (currentUser != nil) {
+        NSUserDefaults *standardDefaults = [NSUserDefaults standardUserDefaults];
+        [standardDefaults setBool:YES forKey:kIfLogin];
+        [standardDefaults synchronize];
         // 允许用户使用应用
-        NSArray *list = [NSArray arrayWithObjects:@"MT", @"SD", nil];
-        [currentUser setObject:list forKey:@"Channel"];
-        [currentUser save];
+        kDataSource.name = currentUser.username;
+        NSLog(@"username = %@", kDataSource.name);
+
+//        NSArray *list = [NSArray arrayWithObjects:@"MT", @"SD", nil];
+//        [currentUser setObject:list forKey:@"Channel"];
+//        [currentUser save];
         
     } else {
         //缓存用户对象为空时， 可打开用户注册界面…
         
-        NSString *ssoFilePath = [[NSBundle mainBundle] pathForResource:@"fakessoT" ofType:@"json"];
-        //NSData *elementsData = [NSData dataWithContentsOfFile:pathString];
-        NSData *elementsData = [[NSData alloc] initWithContentsOfFile:ssoFilePath];
-        
-        NSError *anError = nil;
-        NSDictionary *parsedElements = [NSJSONSerialization JSONObjectWithData:elementsData
-                                                                       options:NSJSONReadingAllowFragments
-                                                                         error:&anError];
-        NSLog(@"path = %@", ssoFilePath);
-        NSLog(@"parsedElements = %@", [parsedElements description]);
-        NSDate *date = [NSDate date];
-        NSMutableDictionary *myobject = [parsedElements mutableCopy];
-        [myobject setValue:date forKey:@"expires_at"];
-        parsedElements = [NSDictionary dictionaryWithDictionary:myobject];
-        [AVUser logInWithUsernameInBackground:@"test0" password:@"123456" block:^(AVUser *user, NSError *error) {
-            if (user != nil) {
-                [user addAuthData:parsedElements block:^(AVUser *user, NSError *error) {
-                    //返回AVUser
-                }];
-            } else {
-                
-            }
-        }];
-        
-        
-        [AVOSCloudSNS setupPlatform:AVOSCloudSNSSinaWeibo withAppKey:@"3913437190" andAppSecret:@"0d6b1f05c023e70a5e1960e7ee6e461a" andRedirectURI:@"http://www.appgame.com"];
-        
-        [AVOSCloudSNS loginWithCallback:^(id object, NSError *error) {
-            //you code here
-            NSLog(@"weibosso:%@,%@",object,parsedElements);
-            
-            [AVUser logInWithUsernameInBackground:@"solidji" password:@"1216" block:^(AVUser *user, NSError *error) {
-                if (user != nil) {
-                    [user addAuthData:object block:^(AVUser *user, NSError *error) {
-                        //返回AVUser
-                    }];
-                } else {
-                    
-                }
-            }];
-            
-            //        [AVUser loginWithAuthData:object block:^(AVUser *user, NSError *error) {
-            //            //返回AVUser
-            //            NSLog(@"username:%@",user);
-            //        }];
-        } toPlatform:AVOSCloudSNSSinaWeibo];
-
+//        NSString *ssoFilePath = [[NSBundle mainBundle] pathForResource:@"fakessoT" ofType:@"json"];
+//        //NSData *elementsData = [NSData dataWithContentsOfFile:pathString];
+//        NSData *elementsData = [[NSData alloc] initWithContentsOfFile:ssoFilePath];
+//        
+//        NSError *anError = nil;
+//        NSDictionary *parsedElements = [NSJSONSerialization JSONObjectWithData:elementsData
+//                                                                       options:NSJSONReadingAllowFragments
+//                                                                         error:&anError];
+//        NSLog(@"path = %@", ssoFilePath);
+//        NSLog(@"parsedElements = %@", [parsedElements description]);
+//        NSDate *date = [NSDate date];
+//        NSMutableDictionary *myobject = [parsedElements mutableCopy];
+//        [myobject setValue:date forKey:@"expires_at"];
+//        parsedElements = [NSDictionary dictionaryWithDictionary:myobject];
+//        [AVUser logInWithUsernameInBackground:@"test0" password:@"123456" block:^(AVUser *user, NSError *error) {
+//            if (user != nil) {
+//                [user addAuthData:parsedElements block:^(AVUser *user, NSError *error) {
+//                    //返回AVUser
+//                }];
+//            } else {
+//                
+//            }
+//        }];
         
     }
+
     
-    
-    
-    HomeRevealBlock revealBlock = ^(){
-		NSLog(@"打开侧边");
-	};
-    //HomeViewController *homeVC = [[HomeViewController alloc] initWithTitle:@"资讯" withUrl:@"http://www.appgame.com/" withRevealBlock:revealBlock];
+//### 初始化并设置侧边栏
     HomeTabViewController *homeVC = [[HomeTabViewController alloc] initWithTitle:@"资讯"];
     leftMenuViewController *leftMenu = [[leftMenuViewController alloc] init];
-    HomeViewController *rightMenu = [[HomeViewController alloc] initWithTitle:@"资讯R" withUrl:@"http://www.appgame.com/" withRevealBlock:revealBlock];
+    rightMenuViewController *rightMenu = [[rightMenuViewController alloc] init];
     
-//    id currentMenu = [[MDSlideNavigationViewController alloc] initWithRootViewController:[[HomeViewController alloc] initWithTitle:@"资讯" withUrl:@"http://www.appgame.com/" withRevealBlock:revealBlock]];
-//    id leftMenu = [[MDSlideNavigationViewController alloc] initWithRootViewController:[[HomeViewController alloc] initWithTitle:@"资讯1" withUrl:@"http://www.appgame.com/" withRevealBlock:revealBlock]];
-//    id rightMenu = [[MDSlideNavigationViewController alloc] initWithRootViewController:[[HomeViewController alloc] initWithTitle:@"资讯2" withUrl:@"http://www.appgame.com/" withRevealBlock:revealBlock]];
+    [SliderViewController sharedSliderController].LeftVC = leftMenu;
+    [SliderViewController sharedSliderController].RightVC = rightMenu;
+    [SliderViewController sharedSliderController].MainVC = homeVC;
+    [SliderViewController sharedSliderController].RightSContentOffset=280;
+//    [SliderViewController sharedSliderController].RightSContentScale=1.0;
+//    [SliderViewController sharedSliderController].RightSOpenDuration=0.6;
+//    [SliderViewController sharedSliderController].RightSCloseDuration=0.6;
+//    [SliderViewController sharedSliderController].RightSJudgeOffset=60;
+    
+    LRNavigationController *nav=[[LRNavigationController alloc] initWithRootViewController:[SliderViewController sharedSliderController]];
+    nav.contentScale=0.8;
+    nav.judgeOffset=100;
+    nav.startX=0;
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor whiteColor];
-    self.window.rootViewController = [[SlideNavigationController alloc] init];
-    
-    [SlideNavigationController sharedInstance].rightMenu = rightMenu;
-    [SlideNavigationController sharedInstance].leftMenu = leftMenu;
-//    [SlideNavigationController sharedInstance].landscapeSlideOffset = 400;
-//    [SlideNavigationController sharedInstance].portraitSlideOffset = 60;
-    [SlideNavigationController sharedInstance].menuRevealAnimation = MenuRevealAnimationSlide;
-//    [SlideNavigationController sharedInstance].menuRevealAnimationFadeColor = [UIColor greenColor];
-//    [SlideNavigationController sharedInstance].menuRevealAnimationFadeMaximumAlpha = .5;
-//    [SlideNavigationController sharedInstance].menuRevealAnimationSlideMovement = 50;
-    [[SlideNavigationController sharedInstance] switchToViewController:homeVC withCompletion:nil];
-    
+    self.window.rootViewController = nav;
+    self.window.backgroundColor = [UIColor clearColor];
     [self.window makeKeyAndVisible];
+    
     return YES;
 }
 

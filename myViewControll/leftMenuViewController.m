@@ -13,6 +13,7 @@
 #import "HomeViewController.h"
 #import "GlobalConfigure.h"
 #import "Globle.h"
+#import "SliderViewController.h"
 
 #pragma mark -
 #pragma mark Constants
@@ -48,15 +49,15 @@ NSString const *kSidebarCellImageKey = @"CellImage";
 	// Do any additional setup after loading the view.
     //self.view.frame = CGRectMake(0.0f, 0.0f, kGHRevealSidebarWidth, CGRectGetHeight(self.view.bounds));
 	self.view.autoresizingMask = UIViewAutoresizingFlexibleHeight;
-	
+	self.view.backgroundColor = [UIColor whiteColor];
 	//[self.view addSubview:_searchBar];
 	
-	_menuTableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds) - 0.0f)//44.0f
-												  style:UITableViewStylePlain];
+	_menuTableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, 70.0f, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds) - 70.0f)];//44.0f
+												  //style:UITableViewStylePlain];
 	_menuTableView.delegate = self;
 	_menuTableView.dataSource = self;
 	_menuTableView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
-	_menuTableView.backgroundColor = [UIColor clearColor];
+	_menuTableView.backgroundColor = [UIColor whiteColor];
     _menuTableView.allowsSelection = YES;
     _menuTableView.separatorStyle = UITableViewCellSeparatorStyleNone;//分割线样式
     _menuTableView.scrollEnabled = NO;//设置为不能拖动
@@ -97,7 +98,7 @@ NSString const *kSidebarCellImageKey = @"CellImage";
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-
+    [self.navigationController.navigationBar setHidden:YES];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation {
@@ -107,9 +108,19 @@ NSString const *kSidebarCellImageKey = @"CellImage";
 }
 
 #pragma mark UITableViewDataSource
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
+//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+//    return 1;
+//}
+
+//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+//
+//    if(section == 0)
+//    {
+//        if(IOS_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) return 88+20.0f;
+//        return 88.0f;
+//    }
+//    return (_headers[section] == [NSNull null]) ? 0.0f : 20.0f;
+//}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 2;
@@ -135,23 +146,16 @@ NSString const *kSidebarCellImageKey = @"CellImage";
 }
 
 #pragma mark UITableViewDelegate
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    
-    if(section == 0)
-    {
-        if(IOS_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) return 88+20.0f;
-        return 88.0f;
-    }
-    return (_headers[section] == [NSNull null]) ? 0.0f : 20.0f;
-}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
-        HomeViewController *vc1 = [[HomeViewController alloc] initWithTitle:@"首页" withUrl:@"http://www.appgame.com/"];
-        [[SlideNavigationController sharedInstance] switchToViewController:vc1 withCompletion:nil];
+        //HomeViewController *vc1 = [[HomeViewController alloc] initWithTitle:@"首页" withUrl:@"http://www.appgame.com/"];
+        //[[SlideNavigationController sharedInstance] switchToViewController:vc1 withCompletion:nil];
+        [[SliderViewController sharedSliderController] showContentControllerWithModel:@"HomeViewController"];
     }else {
-        HomeViewController *vc2 = [[HomeViewController alloc] initWithTitle:@"我叫MT" withUrl:@"http://mt.appgame.com/"];
-        [[SlideNavigationController sharedInstance] switchToViewController:vc2 withCompletion:nil];
+        //HomeViewController *vc2 = [[HomeViewController alloc] initWithTitle:@"我叫MT" withUrl:@"http://mt.appgame.com/"];
+        //[[SlideNavigationController sharedInstance] switchToViewController:vc2 withCompletion:nil];
+        [[SliderViewController sharedSliderController] showContentControllerWithModel:@"HomeTabViewController"];
     }
 }
 

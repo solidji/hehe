@@ -1,0 +1,60 @@
+PODS:
+  - AFNetworking (2.0.3):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+    - AFNetworking/UIKit
+  - AFNetworking/NSURLConnection (2.0.3):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/NSURLSession (2.0.3):
+    - AFNetworking/NSURLConnection
+  - AFNetworking/Reachability (2.0.3)
+  - AFNetworking/Security (2.0.3)
+  - AFNetworking/Serialization (2.0.3)
+  - AFNetworking/UIKit (2.0.3):
+    - AFNetworking/NSURLConnection
+  - AVOSCloud (2.2.1)
+  - AVOSCloudSNS (2.2.1):
+    - AVOSCloud
+  - GoogleAnalytics-iOS-SDK (3.0.2)
+  - iVersion (1.10.6)
+  - KYCircleMenu (1.1.0)
+  - LRNavigationController (1.0.0)
+  - NJKScrollFullScreen (0.2)
+  - OpenUDID (1.0.0)
+  - SDWebImage (3.5.2):
+    - SDWebImage/Core
+  - SDWebImage/Core (3.5.2)
+  - SliderViewController (1.2.0)
+
+DEPENDENCIES:
+  - AFNetworking (~> 2.0.3)
+  - AVOSCloud (~> 2.2.1)
+  - AVOSCloudSNS (~> 2.2.1)
+  - GoogleAnalytics-iOS-SDK (~> 3.0.2)
+  - iVersion (~> 1.10.6)
+  - KYCircleMenu (~> 1.1.0)
+  - LRNavigationController (~> 1.0.0)
+  - NJKScrollFullScreen (~> 0.2)
+  - OpenUDID (~> 1.0.0)
+  - SDWebImage (~> 3.5.2)
+  - SliderViewController (~> 1.2.0)
+
+SPEC CHECKSUMS:
+  AFNetworking: e499052cbf3d743e9bb727bb37adb9dc2547ba15
+  AVOSCloud: a93079ae83c5dd3616f97feffff189391771ead6
+  AVOSCloudSNS: 72491ea7c8589c14c8f89e67dc9921ca7b815c35
+  GoogleAnalytics-iOS-SDK: 86393b99f7328ae8d8e975fcaa8632a39dafafe8
+  iVersion: 36b392de6d86425f4a82439fd120c7753b52ea39
+  KYCircleMenu: 23e3a2b8e968da2cf64f26637f7bc9fe01e95b02
+  LRNavigationController: d83c1fc1ba54dcf991806e6d3fd1274eafc61cdd
+  NJKScrollFullScreen: e6afddd7f9c33d43126e3b547b39cd99fa2ee0a3
+  OpenUDID: 13ab988776ef38dca1e2e799e961448cf83a8111
+  SDWebImage: fe7ce01ae4e0a884d168f59c9dd82d35baf8429e
+  SliderViewController: 23c903b10ab53b490fb4cda298fc152d8ddde05e
+
+COCOAPODS: 0.29.0

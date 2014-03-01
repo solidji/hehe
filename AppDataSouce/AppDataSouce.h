@@ -18,38 +18,65 @@
 
 + (AppDataSouce *)shareInstance;
 
-@property (nonatomic, retain) NSString          *username;
-@property (nonatomic, retain) NSString          *password;
-@property (nonatomic, retain) NSString          *remote_auth_s3;
-@property (nonatomic, retain) NSString          *api_key;
+
+//账号属性
+@property (nonatomic, copy) NSString          *username;
+@property (nonatomic, copy) NSString          *password;
+@property (nonatomic, copy) NSString          *remote_auth_s3;
+@property (nonatomic, copy) NSString          *api_key;
 @property (nonatomic) BOOL                      isLogin;
 
-//@property (nonatomic, retain) GHMenuViewController      *menuController;
-//@property (nonatomic, retain) IADisqusUser              *userObject;
-//@property (nonatomic, retain) AFOAuthCredential       *credentialObject;
-
-@property (nonatomic, retain) NSMutableArray          *reviewPromoList;
-@property (nonatomic, retain) NSMutableArray          *reviewList;
-@property (nonatomic, retain) NSMutableArray          *reviewOtherList;
 
 
-@property (nonatomic, retain) NSMutableArray          *gameList;
-@property (nonatomic, retain) NSMutableArray          *guideList;
-@property (nonatomic, retain) NSMutableArray          *raidersList;
+//用户个人属性
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy) NSString *about;
+@property (nonatomic, strong) NSNumber *numPosts;
+@property (nonatomic, strong) NSNumber *numFollowers;
+@property (nonatomic, strong) NSNumber *numFollowing;
+@property (nonatomic, strong) NSNumber *numLikesReceived;
+@property (nonatomic, copy) NSString *url;
+
+@property (nonatomic, copy) NSString *profileUrl;
+
+@property (nonatomic, strong) NSNumber *reputation;
+@property (nonatomic, copy) NSString *location;
+
+@property (nonatomic, strong) NSDate *joinedAt;
+@property (nonatomic, copy) NSString *userID;
+@property (nonatomic, copy) NSString *authorAvatar;
+
+@property (nonatomic) BOOL isFollowedBy;
+@property (nonatomic) BOOL isFollowing;
+@property (nonatomic) BOOL isOneself;
 
 
-@property (nonatomic, retain) NSMutableArray          *eventPromoList;
-@property (nonatomic, retain) NSMutableArray          *eventOpenList;
-@property (nonatomic, retain) NSMutableArray          *eventEndList;
+
+//列表
+@property (nonatomic, strong) NSMutableArray          *reviewPromoList;
+@property (nonatomic, strong) NSMutableArray          *reviewList;
+@property (nonatomic, strong) NSMutableArray          *reviewOtherList;
 
 
-@property (nonatomic, retain) NSMutableArray          *changeList;
-@property (nonatomic, retain) NSMutableArray          *tradeList;
+@property (nonatomic, strong) NSMutableArray          *gameList;
+@property (nonatomic, strong) NSMutableArray          *guideList;
+@property (nonatomic, strong) NSMutableArray          *raidersList;
 
 
-@property (nonatomic, retain) NSMutableArray          *treasureList;
-@property (nonatomic, retain) NSMutableArray          *joinEventList;
-@property (nonatomic, retain) NSMutableArray          *collectList;
+@property (nonatomic, strong) NSMutableArray          *eventPromoList;
+@property (nonatomic, strong) NSMutableArray          *eventOpenList;
+@property (nonatomic, strong) NSMutableArray          *eventEndList;
 
 
+@property (nonatomic, strong) NSMutableArray          *changeList;
+@property (nonatomic, strong) NSMutableArray          *tradeList;
+
+
+@property (nonatomic, strong) NSMutableArray          *treasureList;
+@property (nonatomic, strong) NSMutableArray          *joinEventList;
+@property (nonatomic, strong) NSMutableArray          *collectList;
+
+//@property (nonatomic, strong) GHMenuViewController      *menuController;
+//@property (nonatomic, strong) IADisqusUser              *userObject;
+//@property (nonatomic, strong) AFOAuthCredential       *credentialObject;
 @end

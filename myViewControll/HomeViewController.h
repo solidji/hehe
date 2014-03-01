@@ -10,6 +10,8 @@
 #import <Foundation/Foundation.h>
 #import <MessageUI/MessageUI.h>
 #import "PullToRefreshTableView.h"
+#import "MJRefresh.h"
+
 #import "AlerViewManager.h"
 #import "TFIndicatorView.h"
 //#import "SINavigationMenuView.h"
@@ -17,12 +19,13 @@
 
 #import "GAITrackedViewController.h"
 #import "GAI.h"
+#import "NJKScrollFullScreen.h"
 
 typedef void (^HomeRevealBlock)();
-@interface HomeViewController : GAITrackedViewController <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, UIGestureRecognizerDelegate,SlideNavigationControllerDelegate>{
+@interface HomeViewController : GAITrackedViewController <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, NJKScrollFullscreenDelegate, UIGestureRecognizerDelegate,SlideNavigationControllerDelegate>{
 
     NSMutableArray *comments;//数据源
-    PullToRefreshTableView *pullToRefreshTableView;
+    UITableView *pullToRefreshTableView;
     
     AlerViewManager *alerViewManager;
     TFIndicatorView *etActivity;
@@ -33,18 +36,21 @@ typedef void (^HomeRevealBlock)();
     BOOL ifProxy;
     BOOL updating;//正在更新中,不要重复了
     //SINavigationMenuView *menu;
+    NJKScrollFullScreen *scrollProxy;
 @private
 	HomeRevealBlock _revealBlock;
 }
 
 @property (nonatomic, copy) NSString *webURL;
-@property (nonatomic, strong) PullToRefreshTableView * pullToRefreshTableView;
+@property (nonatomic, strong) UITableView * pullToRefreshTableView;
 @property (strong, nonatomic) NSMutableArray *comments;
 //@property (nonatomic, strong) SINavigationMenuView *menu;
+@property (nonatomic) NJKScrollFullScreen *scrollProxy;
 
 - (id)initWithTitle:(NSString *)title  withUrl:(NSString *)url;
 - (id)initWithTitle:(NSString *)title withUrl:(NSString *)url withRevealBlock:(HomeRevealBlock)revealBlock;
 
 - (void)updateThread:(NSString *)returnKey;
 - (void)updateTableView;
+
 @end

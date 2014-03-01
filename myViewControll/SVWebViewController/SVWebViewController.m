@@ -8,22 +8,18 @@
 
 #import <StoreKit/StoreKit.h>
 #import "SVWebViewController.h"
-//#import "IADisquser.h"
-#import "IADisqusConfig.h"
-#import "CommentViewController.h"
-#import "AFHTTPClient.h"
-#import "AFXMLRequestOperation.h"
-#import <ShareSDK/ShareSDK.h>
-#import "WXApi.h"
+
+#import "AFNetworking.h"
+//#import <ShareSDK/ShareSDK.h>
+//#import "WXApi.h"
 
 #import "YIPopupTextView.h"
 #import "AppDataSouce.h"
 #import "GlobalConfigure.h"
-#import "DisqusHTTPClient.h"
 #import "TFIndicatorView.h"
 #import "GHRootViewController.h"
 #import "HomeViewController.h"
-#import "SigninViewController.h"
+//#import "SigninViewController.h"
 #import "Globle.h"
 
 @interface SVWebViewController () <UIWebViewDelegate, UIActionSheetDelegate, MFMailComposeViewControllerDelegate>
@@ -402,7 +398,8 @@
     
 
     [self updateToolbarItems];
-    self.view.backgroundColor = [UIColor colorWithRed:234.0/255 green:234.0/255 blue:234.0/255 alpha:1.0];
+    //self.view.backgroundColor = [UIColor colorWithRed:234.0/255 green:234.0/255 blue:234.0/255 alpha:1.0];
+    self.view.backgroundColor = [UIColor whiteColor];
 }
 
 - (void)viewDidUnload {
@@ -671,17 +668,24 @@
                 return NO;//对论坛站或者主页面直接用网页打开self.mainWebView.request.URL.absoluteString
             }
             NSLog(@"站内页面");
-            AFHTTPClient *jsonapiClient = [AFHTTPClient clientWithBaseURL:[inRequest URL]];
+            
+            AFHTTPRequestOperationManager *jsonapiClient;
+            jsonapiClient = [AFHTTPRequestOperationManager manager];
+            jsonapiClient.responseSerializer = [AFJSONResponseSerializer serializer];
+            jsonapiClient.requestSerializer = [AFJSONRequestSerializer serializer];
+            
+            //AFHTTPClient *jsonapiClient = [AFHTTPClient clientWithBaseURL:[inRequest URL]];
             
             NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
                                         @"1", @"json",
                                         @"attachments", @"exclude",
                                         nil];
             
-            [jsonapiClient getPath:@""
-                        parameters:parameters
-                           success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                               
+            [jsonapiClient GET:[inRequest URL].absoluteString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//            [jsonapiClient getPath:@""
+//                        parameters:parameters
+//                           success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                
                                __block NSString *jsonString = operation.responseString;
                                
                                //过滤掉w3tc缓存附加在json数据后面的
@@ -908,48 +912,48 @@
     //NSLog(@"textView:%@",self.textView);
     if (!cancelled) {
         //IADisquser *iaDisquser = [[IADisquser alloc] initWithIdentifier:@"disqus.com"];
-        [IADisquser getThreadIdWithLink:self.URL.absoluteString
-                                success:^(NSString *threadID) {
-                                    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
-                                                                //kDataSource.credentialObject.accessToken, @"access_token",
-                                                                //DISQUS_API_SECRET, @"api_secret",
-                                                                DISQUS_API_WEB,@"api_key",
-                                                                //dUser.userID, @"user",
-                                                                self.textView,@"message",
-                                                                threadID,@"thread",
-                                                                nil];
-                                    
-                                    BOOL isLogin = [[DisqusHTTPClient sharedClient] isLoggedIn];
-                                    if (!isLogin) {
-                                        [self.alerViewManager showOnlyMessage:@"亲爱的用户,此操作需要登录!" inView:self.view];
-                                        [self performSelector:@selector(needSignin) withObject:nil afterDelay:2];                                         
-                                    }else {
-                                        //create the post
-                                        [[DisqusHTTPClient sharedClient] postComment:(NSDictionary *)parameters
-                                                             success:^(NSDictionary *responseDictionary){
-                                                                 // check the code (success is 0)
-                                                                 NSNumber *code = [responseDictionary objectForKey:@"code"];
-                                                                 
-                                                                 if ([code integerValue] != 0) {   // there's an error
-                                                                     NSLog(@"评论发表异常");
-                                                                     [alerViewManager showOnlyMessage:@"评论发表异常!" inView:self.view];
-                                                                 }else {
-                                                                     NSArray *responseArray = [responseDictionary objectForKey:@"response"];
-                                                                     if ([responseArray count] != 0) {
-                                                                         NSLog(@"成功发表评论:%@,%@,%@",self.URL.absoluteString, threadID, self.textView);
-                                                                         [alerViewManager showOnlyMessage:@"成功发表评论!" inView:self.view];
-                                                                     }
-                                                                 }
-                                                             }
-                                                                failure:^(NSError *error) {
-                                                                    NSLog(@"发表评论失败:%@",error);
-                                                                    [alerViewManager showOnlyMessage:@"发表评论失败!" inView:self.view];
-                                                                }];
-                                    }
-                                } fail:^(NSError *error) {
-                                    NSLog(@"发表评论失败:%@",error);
-                                    [alerViewManager showOnlyMessage:@"发表评论失败!" inView:self.view];
-                                }];
+//        [IADisquser getThreadIdWithLink:self.URL.absoluteString
+//                                success:^(NSString *threadID) {
+//                                    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
+//                                                                //kDataSource.credentialObject.accessToken, @"access_token",
+//                                                                //DISQUS_API_SECRET, @"api_secret",
+//                                                                DISQUS_API_WEB,@"api_key",
+//                                                                //dUser.userID, @"user",
+//                                                                self.textView,@"message",
+//                                                                threadID,@"thread",
+//                                                                nil];
+//                                    
+//                                    BOOL isLogin = [[DisqusHTTPClient sharedClient] isLoggedIn];
+//                                    if (!isLogin) {
+//                                        [self.alerViewManager showOnlyMessage:@"亲爱的用户,此操作需要登录!" inView:self.view];
+//                                        [self performSelector:@selector(needSignin) withObject:nil afterDelay:2];                                         
+//                                    }else {
+//                                        //create the post
+//                                        [[DisqusHTTPClient sharedClient] postComment:(NSDictionary *)parameters
+//                                                             success:^(NSDictionary *responseDictionary){
+//                                                                 // check the code (success is 0)
+//                                                                 NSNumber *code = [responseDictionary objectForKey:@"code"];
+//                                                                 
+//                                                                 if ([code integerValue] != 0) {   // there's an error
+//                                                                     NSLog(@"评论发表异常");
+//                                                                     [alerViewManager showOnlyMessage:@"评论发表异常!" inView:self.view];
+//                                                                 }else {
+//                                                                     NSArray *responseArray = [responseDictionary objectForKey:@"response"];
+//                                                                     if ([responseArray count] != 0) {
+//                                                                         NSLog(@"成功发表评论:%@,%@,%@",self.URL.absoluteString, threadID, self.textView);
+//                                                                         [alerViewManager showOnlyMessage:@"成功发表评论!" inView:self.view];
+//                                                                     }
+//                                                                 }
+//                                                             }
+//                                                                failure:^(NSError *error) {
+//                                                                    NSLog(@"发表评论失败:%@",error);
+//                                                                    [alerViewManager showOnlyMessage:@"发表评论失败!" inView:self.view];
+//                                                                }];
+//                                    }
+//                                } fail:^(NSError *error) {
+//                                    NSLog(@"发表评论失败:%@",error);
+//                                    [alerViewManager showOnlyMessage:@"发表评论失败!" inView:self.view];
+//                                }];
     }
 }
 
@@ -969,18 +973,19 @@
 //    SigninViewController *viewController = [[SigninViewController alloc] initWithTitle:@"我的账号" withFrame:CGRectMake(0, 0, [Globle shareInstance].globleWidth, [Globle shareInstance].globleAllHeight)];
 //    
 //    [self.navigationController pushViewController:viewController animated:YES];
-    SigninBlock revealBlock = ^(){
-        [self dismissViewControllerAnimated:YES completion:NULL];
-    };
     
-    SigninViewController *signinViewController = [[SigninViewController alloc] initWithTitle:@"我的账号" withFrame:CGRectMake(0, 0, [Globle shareInstance].globleWidth, [Globle shareInstance].globleAllHeight) withRevealBlock:revealBlock];
-    
-    signinViewController.modalPresentationStyle = UIModalPresentationCurrentContext;
-    id viewController= [[UINavigationController alloc] initWithRootViewController:signinViewController];
-    
-    [self presentViewController:viewController
-                       animated:YES
-                     completion:nil];
+//    SigninBlock revealBlock = ^(){
+//        [self dismissViewControllerAnimated:YES completion:NULL];
+//    };
+//    
+//    SigninViewController *signinViewController = [[SigninViewController alloc] initWithTitle:@"我的账号" withFrame:CGRectMake(0, 0, [Globle shareInstance].globleWidth, [Globle shareInstance].globleAllHeight) withRevealBlock:revealBlock];
+//    
+//    signinViewController.modalPresentationStyle = UIModalPresentationCurrentContext;
+//    id viewController= [[UINavigationController alloc] initWithRootViewController:signinViewController];
+//    
+//    [self presentViewController:viewController
+//                       animated:YES
+//                     completion:nil];
 }
 
 - (void)goTextViewClicked:(UIButton *)sender {
@@ -1031,36 +1036,36 @@
     [standardDefaults setObject:dObject forKey:@"Favorites"];
     [standardDefaults synchronize];
     
-    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
-                                //kDataSource.credentialObject.accessToken, @"access_token",
-                                //DISQUS_API_SECRET, @"api_secret",
-                                DISQUS_API_WEB,@"api_key",
-                                @"appgame", @"forum",
-                                @"1",@"vote",
-                                self.URL.absoluteString,@"thread:link",
-                                nil];
-
-    BOOL isLogin = [[DisqusHTTPClient sharedClient] isLoggedIn];
-    if (!isLogin) {
-        //[alerViewManager showOnlyMessage:@"亲爱的用户,此操作需要登录!" inView:self.view];
-        //[self performSelector:@selector(needSignin) withObject:nil afterDelay:2];
-    }else {
-        //create the post
-        [[DisqusHTTPClient sharedClient] voteThreads:(NSDictionary *)parameters
-                                             success:^(NSDictionary *responseDictionary){
-                                                 // check the code (success is 0)
-                                                 NSNumber *code = [responseDictionary objectForKey:@"code"];
-                                                 
-                                                 if ([code integerValue] != 0) {   // there's an error
-                                                     NSLog(@"评论投票异常");
-                                                 }else {
-                                                    NSLog(@"成功投票文章:%@", self.URL.absoluteString);
-                                                 }
-                                             }
-                                             failure:^(NSError *error) {
-                                                 NSLog(@"发表投票失败:%@",error);
-                                             }];
-    }
+//    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
+//                                //kDataSource.credentialObject.accessToken, @"access_token",
+//                                //DISQUS_API_SECRET, @"api_secret",
+//                                DISQUS_API_WEB,@"api_key",
+//                                @"appgame", @"forum",
+//                                @"1",@"vote",
+//                                self.URL.absoluteString,@"thread:link",
+//                                nil];
+//
+//    BOOL isLogin = [[DisqusHTTPClient sharedClient] isLoggedIn];
+//    if (!isLogin) {
+//        //[alerViewManager showOnlyMessage:@"亲爱的用户,此操作需要登录!" inView:self.view];
+//        //[self performSelector:@selector(needSignin) withObject:nil afterDelay:2];
+//    }else {
+//        //create the post
+//        [[DisqusHTTPClient sharedClient] voteThreads:(NSDictionary *)parameters
+//                                             success:^(NSDictionary *responseDictionary){
+//                                                 // check the code (success is 0)
+//                                                 NSNumber *code = [responseDictionary objectForKey:@"code"];
+//                                                 
+//                                                 if ([code integerValue] != 0) {   // there's an error
+//                                                     NSLog(@"评论投票异常");
+//                                                 }else {
+//                                                    NSLog(@"成功投票文章:%@", self.URL.absoluteString);
+//                                                 }
+//                                             }
+//                                             failure:^(NSError *error) {
+//                                                 NSLog(@"发表投票失败:%@",error);
+//                                             }];
+//    }
     
     //[self updateToolbarItems];
 }
@@ -1088,12 +1093,12 @@
 
 - (void)goCommentClicked:(id)sender {
     
-    CommentViewController *viewController = [[CommentViewController alloc] initWithTitle:self.htmlString.title withUrl:[self.htmlString.articleURL absoluteString] threadID:@"-1"];
+    //CommentViewController *viewController = [[CommentViewController alloc] initWithTitle:self.htmlString.title withUrl:[self.htmlString.articleURL absoluteString] threadID:@"-1"];
     
 //    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithTitle:@"正文" style:UIBarButtonItemStyleBordered target:nil action:nil];
 //    [self.navigationItem setBackBarButtonItem:backItem];
 
-    [self.navigationController pushViewController:viewController animated:YES];
+    //[self.navigationController pushViewController:viewController animated:YES];
 }
 
 - (void)shareClicked:(UIButton *)sender {
@@ -1102,209 +1107,105 @@
 	NSString *shareString =  [NSString stringWithFormat:@"%@\r\n%@\r\n#任玩堂#https://itunes.apple.com/cn/app/ren-wan-tang-appgame.com/id696542515?mt=8",aArticleItem.title ,aArticleItem.articleURL];
     NSString *shareStringUrl = aArticleItem.articleURL.absoluteString;
     NSLog(@"absolute:%@",self.mainWebView.request.URL.absoluteString);
-    if (self.htmlString == nil) {
-        shareString =  [NSString stringWithFormat:@"%@\r\n%@\r\n#任玩堂#https://itunes.apple.com/cn/app/ren-wan-tang-appgame.com/id696542515?mt=8", [self.mainWebView stringByEvaluatingJavaScriptFromString:@"document.title"], self.mainWebView.request.URL.absoluteString];
-        
-        shareStringUrl = self.mainWebView.request.URL.absoluteString;
-    }
-    
-    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-        id<ISSContainer> container = [ShareSDK container];
-        [container setIPadContainerWithView:self.navigationItem.rightBarButtonItem.customView arrowDirect:UIPopoverArrowDirectionUp];
-        NSString *imagePath = [[NSBundle mainBundle] pathForResource:@"logoshare" ofType:@"jpg"];
-        id<ISSCAttachment> issca = [ShareSDK imageWithPath:imagePath];
-        if (aArticleItem.articleIconURL != nil) {
-            UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:aArticleItem.articleIconURL]];
-            issca = [ShareSDK jpegImageWithImage:image quality:(1.0)];
-        }
-        
-        
-        
-        //构造分享内容
-        id<ISSContent> publishContent = [ShareSDK content:shareString
-                                           defaultContent:@"默认分享内容,没内容时显示"
-                                                    image:issca
-                                                    title:aArticleItem.title url:shareStringUrl description:aArticleItem.description mediaType:SSPublishContentMediaTypeNews];
-        
-        NSArray *shareList = [ShareSDK getShareListWithType:ShareTypeSinaWeibo, ShareTypeTencentWeibo, ShareTypeWeixiSession,ShareTypeWeixiTimeline, ShareTypeMail,ShareTypeCopy,  nil];//ShareTypeAirPrint,ShareTypeSMS
-        [ShareSDK showShareActionSheet:container shareList:shareList
-                               content:publishContent
-                         statusBarTips:YES
-                           authOptions:[ShareSDK authOptionsWithAutoAuth:YES
-                                                           allowCallback:NO
-                                                           authViewStyle:SSAuthViewStyleModal
-                                                            viewDelegate:nil
-                                                 authManagerViewDelegate:nil]
-                          shareOptions:[ShareSDK defaultShareOptionsWithTitle:@"分享"
-                                                              oneKeyShareList:shareList
-                                                               qqButtonHidden:YES
-                                                        wxSessionButtonHidden:YES
-                                                       wxTimelineButtonHidden:YES
-                                                         showKeyboardOnAppear:NO
-                                                            shareViewDelegate:nil
-                                                          friendsViewDelegate:nil
-                                                        picViewerViewDelegate:nil]
-                                result:^(ShareType type, SSPublishContentState state,
-                                         id<ISSStatusInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
-                                    if (state == SSPublishContentStateSuccess)
-                                    {
-                                        NSLog(@"分享成功");
-                                    }
-                                    else if (state == SSPublishContentStateFail) {
-                                        NSLog(@"分享失败,错误码:%d,错误描述:%@", [error errorCode], [error errorDescription]);
-                                    } }];
-        
-        //[self.pageActionSheet showFromBarButtonItem:self.actionBarButtonItem animated:YES];
-    }else {
-        NSString *imagePath = [[NSBundle mainBundle] pathForResource:@"logoshare" ofType:@"jpg"];
-        id<ISSCAttachment> issca = [ShareSDK imageWithPath:imagePath];
-        if (aArticleItem.articleIconURL != nil) {
-            UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:aArticleItem.articleIconURL]];
-            issca = [ShareSDK jpegImageWithImage:image quality:(1.0)];
-        }
-        //构造分享内容
-        id<ISSContent> publishContent = [ShareSDK content:shareString
-                                           defaultContent:@"默认分享内容,没内容时显示"
-                                                    image:issca
-                                                    title:aArticleItem.title url:shareStringUrl description:aArticleItem.description mediaType:SSPublishContentMediaTypeNews];
-        
-        NSArray *shareList = [ShareSDK getShareListWithType:ShareTypeSinaWeibo, ShareTypeTencentWeibo, ShareTypeWeixiSession,ShareTypeWeixiTimeline, ShareTypeMail,ShareTypeCopy,  nil];//ShareTypeAirPrint,ShareTypeSMS
-        [ShareSDK showShareActionSheet:nil shareList:shareList
-                               content:publishContent
-                         statusBarTips:YES
-                           authOptions:[ShareSDK authOptionsWithAutoAuth:YES
-                                                           allowCallback:NO
-                                                           authViewStyle:SSAuthViewStyleModal
-                                                            viewDelegate:nil
-                                                 authManagerViewDelegate:nil]
-                          shareOptions:[ShareSDK defaultShareOptionsWithTitle:@"分享"
-                                                              oneKeyShareList:shareList
-                                                               qqButtonHidden:YES
-                                                        wxSessionButtonHidden:YES
-                                                       wxTimelineButtonHidden:YES
-                                                         showKeyboardOnAppear:NO
-                                                            shareViewDelegate:nil
-                                                          friendsViewDelegate:nil
-                                                        picViewerViewDelegate:nil]
-                                result:^(ShareType type, SSPublishContentState state,
-                                         id<ISSStatusInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
-                                    if (state == SSPublishContentStateSuccess)
-                                    {
-                                        NSLog(@"分享成功");
-                                    }
-                                    else if (state == SSPublishContentStateFail) {
-                                        NSLog(@"分享失败,错误码:%d,错误描述:%@", [error errorCode], [error errorDescription]);
-                                    } }];
-    }
+//    if (self.htmlString == nil) {
+//        shareString =  [NSString stringWithFormat:@"%@\r\n%@\r\n#任玩堂#https://itunes.apple.com/cn/app/ren-wan-tang-appgame.com/id696542515?mt=8", [self.mainWebView stringByEvaluatingJavaScriptFromString:@"document.title"], self.mainWebView.request.URL.absoluteString];
+//        
+//        shareStringUrl = self.mainWebView.request.URL.absoluteString;
+//    }
+//    
+//    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+//        id<ISSContainer> container = [ShareSDK container];
+//        [container setIPadContainerWithView:self.navigationItem.rightBarButtonItem.customView arrowDirect:UIPopoverArrowDirectionUp];
+//        NSString *imagePath = [[NSBundle mainBundle] pathForResource:@"logoshare" ofType:@"jpg"];
+//        id<ISSCAttachment> issca = [ShareSDK imageWithPath:imagePath];
+//        if (aArticleItem.articleIconURL != nil) {
+//            UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:aArticleItem.articleIconURL]];
+//            issca = [ShareSDK jpegImageWithImage:image quality:(1.0)];
+//        }
+//        
+//        
+//        
+//        //构造分享内容
+//        id<ISSContent> publishContent = [ShareSDK content:shareString
+//                                           defaultContent:@"默认分享内容,没内容时显示"
+//                                                    image:issca
+//                                                    title:aArticleItem.title url:shareStringUrl description:aArticleItem.description mediaType:SSPublishContentMediaTypeNews];
+//        
+//        NSArray *shareList = [ShareSDK getShareListWithType:ShareTypeSinaWeibo, ShareTypeTencentWeibo, ShareTypeWeixiSession,ShareTypeWeixiTimeline, ShareTypeMail,ShareTypeCopy,  nil];//ShareTypeAirPrint,ShareTypeSMS
+//        [ShareSDK showShareActionSheet:container shareList:shareList
+//                               content:publishContent
+//                         statusBarTips:YES
+//                           authOptions:[ShareSDK authOptionsWithAutoAuth:YES
+//                                                           allowCallback:NO
+//                                                           authViewStyle:SSAuthViewStyleModal
+//                                                            viewDelegate:nil
+//                                                 authManagerViewDelegate:nil]
+//                          shareOptions:[ShareSDK defaultShareOptionsWithTitle:@"分享"
+//                                                              oneKeyShareList:shareList
+//                                                               qqButtonHidden:YES
+//                                                        wxSessionButtonHidden:YES
+//                                                       wxTimelineButtonHidden:YES
+//                                                         showKeyboardOnAppear:NO
+//                                                            shareViewDelegate:nil
+//                                                          friendsViewDelegate:nil
+//                                                        picViewerViewDelegate:nil]
+//                                result:^(ShareType type, SSPublishContentState state,
+//                                         id<ISSStatusInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
+//                                    if (state == SSPublishContentStateSuccess)
+//                                    {
+//                                        NSLog(@"分享成功");
+//                                    }
+//                                    else if (state == SSPublishContentStateFail) {
+//                                        NSLog(@"分享失败,错误码:%d,错误描述:%@", [error errorCode], [error errorDescription]);
+//                                    } }];
+//        
+//        //[self.pageActionSheet showFromBarButtonItem:self.actionBarButtonItem animated:YES];
+//    }else {
+//        NSString *imagePath = [[NSBundle mainBundle] pathForResource:@"logoshare" ofType:@"jpg"];
+//        id<ISSCAttachment> issca = [ShareSDK imageWithPath:imagePath];
+//        if (aArticleItem.articleIconURL != nil) {
+//            UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:aArticleItem.articleIconURL]];
+//            issca = [ShareSDK jpegImageWithImage:image quality:(1.0)];
+//        }
+//        //构造分享内容
+//        id<ISSContent> publishContent = [ShareSDK content:shareString
+//                                           defaultContent:@"默认分享内容,没内容时显示"
+//                                                    image:issca
+//                                                    title:aArticleItem.title url:shareStringUrl description:aArticleItem.description mediaType:SSPublishContentMediaTypeNews];
+//        
+//        NSArray *shareList = [ShareSDK getShareListWithType:ShareTypeSinaWeibo, ShareTypeTencentWeibo, ShareTypeWeixiSession,ShareTypeWeixiTimeline, ShareTypeMail,ShareTypeCopy,  nil];//ShareTypeAirPrint,ShareTypeSMS
+//        [ShareSDK showShareActionSheet:nil shareList:shareList
+//                               content:publishContent
+//                         statusBarTips:YES
+//                           authOptions:[ShareSDK authOptionsWithAutoAuth:YES
+//                                                           allowCallback:NO
+//                                                           authViewStyle:SSAuthViewStyleModal
+//                                                            viewDelegate:nil
+//                                                 authManagerViewDelegate:nil]
+//                          shareOptions:[ShareSDK defaultShareOptionsWithTitle:@"分享"
+//                                                              oneKeyShareList:shareList
+//                                                               qqButtonHidden:YES
+//                                                        wxSessionButtonHidden:YES
+//                                                       wxTimelineButtonHidden:YES
+//                                                         showKeyboardOnAppear:NO
+//                                                            shareViewDelegate:nil
+//                                                          friendsViewDelegate:nil
+//                                                        picViewerViewDelegate:nil]
+//                                result:^(ShareType type, SSPublishContentState state,
+//                                         id<ISSStatusInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
+//                                    if (state == SSPublishContentStateSuccess)
+//                                    {
+//                                        NSLog(@"分享成功");
+//                                    }
+//                                    else if (state == SSPublishContentStateFail) {
+//                                        NSLog(@"分享失败,错误码:%d,错误描述:%@", [error errorCode], [error errorDescription]);
+//                                    } }];
+//    }
 }
 - (void)actionButtonClicked:(id)sender {
     
     if(pageActionSheet)
         return;
-	
-//    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-//        [self.pageActionSheet showFromBarButtonItem:self.actionBarButtonItem animated:YES];
-//    else
-//        [self.pageActionSheet showFromToolbar:self.navigationController.toolbar];
-    
-    //IADisquser *iaDisquser = [[IADisquser alloc] initWithIdentifier:@"disqus.com"];//path
-    //CommentViewController *viewController = [[CommentViewController alloc] initWithTitle:self.htmlString.title withUrl:self.htmlString.articleURL.absoluteString];
-    
-    ArticleItem *aArticleItem = (ArticleItem*)self.htmlString;
-	NSString *shareString =  [NSString stringWithFormat:@"%@\r\n%@\r\n#任玩堂#https://itunes.apple.com/cn/app/ren-wan-tang-appgame.com/id696542515?mt=8", aArticleItem.title, aArticleItem.articleURL];
-    NSString *shareStringUrl = aArticleItem.articleURL.absoluteString;
-    
-    if (self.htmlString == nil) {
-        shareString =  [NSString stringWithFormat:@"%@\r\n%@\r\n#任玩堂#https://itunes.apple.com/cn/app/ren-wan-tang-appgame.com/id696542515?mt=8", [self.mainWebView stringByEvaluatingJavaScriptFromString:@"document.title"], self.mainWebView.request.URL.absoluteString];
-        
-        shareStringUrl = self.mainWebView.request.URL.absoluteString;
-    }
-    
-    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-        id<ISSContainer> container = [ShareSDK container];
-        [container setIPadContainerWithView:self.navigationItem.rightBarButtonItem.customView arrowDirect:UIPopoverArrowDirectionUp];
-        NSString *imagePath = [[NSBundle mainBundle] pathForResource:@"logoshare" ofType:@"jpg"];
-        id<ISSCAttachment> issca = [ShareSDK imageWithPath:imagePath];
-        if (aArticleItem.articleIconURL != nil) {
-            UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:aArticleItem.articleIconURL]];
-            issca = [ShareSDK jpegImageWithImage:image quality:(1.0)];
-        }
-        //构造分享内容
-        id<ISSContent> publishContent = [ShareSDK content:shareString
-                                           defaultContent:@"默认分享内容,没内容时显示"
-                                                    image:issca
-                                                    title:@"任玩堂" url:shareStringUrl description:@"这是⼀条信息" mediaType:SSPublishContentMediaTypeNews];
-        
-        NSArray *shareList = [ShareSDK getShareListWithType:ShareTypeSinaWeibo, ShareTypeTencentWeibo, ShareTypeWeixiSession,ShareTypeWeixiTimeline, ShareTypeMail,ShareTypeCopy,  nil];//ShareTypeAirPrint,ShareTypeSMS
-        [ShareSDK showShareActionSheet:container shareList:shareList
-                               content:publishContent
-                         statusBarTips:YES
-                           authOptions:[ShareSDK authOptionsWithAutoAuth:YES
-                                                           allowCallback:NO
-                                                           authViewStyle:SSAuthViewStyleModal
-                                                            viewDelegate:nil
-                                                 authManagerViewDelegate:nil]
-                          shareOptions:[ShareSDK defaultShareOptionsWithTitle:@"分享"
-                                                              oneKeyShareList:shareList
-                                                               qqButtonHidden:YES
-                                                        wxSessionButtonHidden:YES
-                                                       wxTimelineButtonHidden:YES
-                                                         showKeyboardOnAppear:NO
-                                                            shareViewDelegate:nil
-                                                          friendsViewDelegate:nil
-                                                        picViewerViewDelegate:nil]
-                                result:^(ShareType type, SSPublishContentState state,
-                                         id<ISSStatusInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
-                                    if (state == SSPublishContentStateSuccess)
-                                    {
-                                        NSLog(@"分享成功");
-                                    }
-                                    else if (state == SSPublishContentStateFail) {
-                                        NSLog(@"分享失败,错误码:%d,错误描述:%@", [error errorCode], [error errorDescription]);
-                                    } }];
-        
-        //[self.pageActionSheet showFromBarButtonItem:self.actionBarButtonItem animated:YES];
-    }else {
-        NSString *imagePath = [[NSBundle mainBundle] pathForResource:@"logoshare" ofType:@"jpg"];
-        id<ISSCAttachment> issca = [ShareSDK imageWithPath:imagePath];
-        if (aArticleItem.articleIconURL != nil) {
-            UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:aArticleItem.articleIconURL]];
-            issca = [ShareSDK jpegImageWithImage:image quality:(1.0)];
-        }
-        //构造分享内容
-        id<ISSContent> publishContent = [ShareSDK content:shareString
-                                           defaultContent:@"默认分享内容,没内容时显示"
-                                                    image:issca
-                                                    title:@"任玩堂" url:shareStringUrl description:@"这是⼀条信息" mediaType:SSPublishContentMediaTypeNews];
-        
-        NSArray *shareList = [ShareSDK getShareListWithType:ShareTypeSinaWeibo, ShareTypeTencentWeibo, ShareTypeWeixiSession,ShareTypeWeixiTimeline, ShareTypeMail,ShareTypeCopy,  nil];//ShareTypeAirPrint,ShareTypeSMS
-        [ShareSDK showShareActionSheet:nil shareList:shareList
-                               content:publishContent
-                         statusBarTips:YES
-                           authOptions:[ShareSDK authOptionsWithAutoAuth:YES
-                                                           allowCallback:NO
-                                                           authViewStyle:SSAuthViewStyleModal
-                                                            viewDelegate:nil
-                                                 authManagerViewDelegate:nil]
-                          shareOptions:[ShareSDK defaultShareOptionsWithTitle:@"分享"
-                                                              oneKeyShareList:shareList
-                                                               qqButtonHidden:YES
-                                                        wxSessionButtonHidden:YES
-                                                       wxTimelineButtonHidden:YES
-                                                         showKeyboardOnAppear:NO
-                                                            shareViewDelegate:nil
-                                                          friendsViewDelegate:nil
-                                                        picViewerViewDelegate:nil]
-                                result:^(ShareType type, SSPublishContentState state,
-                                         id<ISSStatusInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
-                                    if (state == SSPublishContentStateSuccess)
-                                    {
-                                        NSLog(@"分享成功");
-                                    }
-                                    else if (state == SSPublishContentStateFail) {
-                                        NSLog(@"分享失败,错误码:%d,错误描述:%@", [error errorCode], [error errorDescription]);
-                                    } }];
-    }
 }
 
 - (void)doneButtonClicked:(id)sender {
